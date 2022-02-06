@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pits_wallhit.wav-c7ce7b10010e213d05390340df2541de.sample"
+
+[deps]
+
+source_file="res://assets/main/sounds/pits_wallhit.wav"
+dest_files=[ "res://.import/pits_wallhit.wav-c7ce7b10010e213d05390340df2541de.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
