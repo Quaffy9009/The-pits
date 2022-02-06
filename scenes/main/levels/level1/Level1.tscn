@@ -2173,6 +2173,12 @@ cur_camera_point_left = 1632
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( -100, -180 )
+acceleration = 20
+deceleration = 10
+jump_slowing_down = 25
+jump_height = 20.0
+jump_time_to_peak = 0.3
+jump_time_to_descent = 0.2
 
 [node name="AnimationTree" parent="Player" index="2"]
 parameters/playback = SubResource( 50 )

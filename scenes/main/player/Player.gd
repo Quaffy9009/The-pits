@@ -26,16 +26,52 @@ var current
 
 #MOVEMENT VARIABLES
 var move_able = true
-var velocity = Vector2()
-const SPEED = 65
-var GRAVITY = 15
-const JUMPFORCE = -225
-const SHOOTFORCE = -260
+
+const SHOOTFORCE = -260 # height when shooting down
 const HITBACK = -40
+
+var tick = false
+var current_speed = 0
+var is_moving = false
+var has_jumped = false
+var direction
+
+export var acceleration = 10
+export var deceleration = 15
+export var max_speed = 100
+
+
+var velocity = Vector2()
+#jumping variables
+export var jump_slowing_down = 3
+
+export var jump_height : float
+export var jump_time_to_peak : float
+export var jump_time_to_descent : float
+export var lowfallMultiplier = 1
+
+onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
+onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
+onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
+
+
+
+
 
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
+	
+	#for some reason has_jumped fires off without a reason
+	max_speed -= jump_slowing_down
+
+func _process(delta):
+	if has_jumped and is_on_floor():
+		max_speed += jump_slowing_down
+		has_jumped = false
+		tick = false
+
+
 func _physics_process(delta):
 	get_gravity()
 	get_sound()
@@ -43,40 +79,96 @@ func _physics_process(delta):
 	get_input()
 	get_health()
 	shell_amount_func()
-func get_gravity():
-	GRAVITY = Global.cur_gravity
+	#print(velocity.x)
+	
+	#lowers max speed if in air
+	if !is_on_floor():
+		#gravity
+		velocity.y += get_gravity() * delta 
+		if has_jumped and !tick:
+			max_speed -= jump_slowing_down
+			tick = true
+		has_jumped = true
+	
+	if Input.is_action_just_pressed("jump") and is_on_floor() and move_able:
+		jump()
+	
+	#low jumping
+	if has_jumped and Input.is_action_just_released("jump") and velocity.y < 0:
+		velocity.y += lowfallMultiplier
+
+
+func get_gravity() -> float:  #sets gravity type
+	return jump_gravity if velocity.y < 0.0 else fall_gravity
+
+
 func get_input():
 	#print(velocity.length())
-	
 	current = state_machine.get_current_node()
-	if Input.is_action_pressed("right") and move_able == true:
-		$Sprite.flip_h = false
-		velocity.x = SPEED
-	if Input.is_action_pressed("left") and move_able == true:
-		$Sprite.flip_h = true
-		velocity.x = -SPEED
+	
+	if move_able:
+		#acceleration 
+		if is_moving:
+			acceleration()
 		
+		
+		
+		#controls
+		if Input.is_action_pressed("left"):
+			is_moving = true
+			direction = "left"
+			$Sprite.flip_h = true
+		elif Input.is_action_pressed("right"):
+			is_moving = true
+			direction = "right"
+			$Sprite.flip_h = false
+		else: 
+			
+			is_moving = false
+			deceleration()
+		
+	
 	if is_on_floor() and Input.is_action_pressed("up"):
 		state_machine.travel("OnGroundLookingUp")
-	if Input.is_action_just_pressed("jump") and is_on_floor() and move_able == true:
-		velocity.y = JUMPFORCE
-		$Sounds/JumpSound.play()
-	if velocity.length() <= 59:
-		state_machine.travel("Idle")
-	if velocity.length() > 59 and is_on_floor():
-		state_machine.travel("Run")
-	elif velocity.length() > 59 and !is_on_floor() and Input.is_action_pressed("down"):
-		state_machine.travel("LookingDown(OnlyInAir)")
-		Global.scale_x = 0
-	elif velocity.length() > 59 and is_on_floor() == false and Input.is_action_pressed("up"):
-		state_machine.travel("FallLookingUp")
-		Global.scale_x = 0
-	elif velocity.length() > 59 and is_on_floor() == false:
-		state_machine.travel("FallingNormal")
-	velocity.y += GRAVITY
+	
+	
+		
+	#if velocity.length() <= 59:
+	#	state_machine.travel("Idle")
+	#if velocity.length() > 59 and is_on_floor():
+	#	state_machine.travel("Run")
+	#elif velocity.length() > 59 and !is_on_floor() and Input.is_action_pressed("down"):
+	#	state_machine.travel("LookingDown(OnlyInAir)")
+	#	Global.scale_x = 0
+	#elif velocity.length() > 59 and is_on_floor() == false and Input.is_action_pressed("up"):
+	#	state_machine.travel("FallLookingUp")
+	#	Global.scale_x = 0
+	#elif velocity.length() > 59 and is_on_floor() == false:
+	#	state_machine.travel("FallingNormal")
+	
 	move_and_slide(velocity,Vector2.UP)
-	#delete
-	velocity.x = lerp(velocity.x,0,0.2)
+
+func jump(): #jumping
+	velocity.y = jump_velocity
+	$Sounds/JumpSound.play()
+
+func acceleration():
+	if velocity.x < max_speed and direction == "right":
+		velocity.x += acceleration / 2
+	elif velocity.x > -max_speed and direction == "left":
+		velocity.x -= acceleration / 2
+	else:
+		#current_speed = max_speed
+		velocity.x = max_speed * sign(velocity.x)
+
+func deceleration():
+	if velocity.x > 0 and direction == "right":
+		velocity.x -= deceleration
+	elif velocity.x < 0 and direction == "left":
+		velocity.x += deceleration
+	else: velocity.x = 0
+
+
 func get_shoot_input():
 	if Input.is_action_just_pressed("shoot") and Input.is_action_pressed("down") and ammo_amount > 0:
 		shot = true
@@ -102,10 +194,15 @@ func get_shoot_input():
 		$HUD/ShotUI/Sprite3.hide()
 		$HUD/ShotUI/Sprite2.hide()
 		$HUD/ShotUI/Sprite.show()
+
+#shooting
 func shoot():
 	var new_bullet = BULLET_SCENE.instance()
 	new_bullet.position = gun_muzzle.global_position
 	get_tree().current_scene.add_child(new_bullet)
+
+
+#health
 func get_health():
 	if Global.md == true:
 		if health >= 1:
