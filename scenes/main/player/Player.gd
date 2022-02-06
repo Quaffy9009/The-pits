@@ -47,20 +47,16 @@ func get_gravity():
 	GRAVITY = Global.cur_gravity
 func get_input():
 	#print(velocity.length())
-	if $Sprite.scale.x == 4:
-		Global.scale_x = 4
-	elif $Sprite.scale.x == -4:
-		Global.scale_x = -4
+	
 	current = state_machine.get_current_node()
 	if Input.is_action_pressed("right") and move_able == true:
-		$Sprite.scale.x = 1
-		Global.scale_x = 4
+		$Sprite.flip_h = false
 		velocity.x = SPEED
 	if Input.is_action_pressed("left") and move_able == true:
-		$Sprite.scale.x = -1
-		Global.scale_x = -4
+		$Sprite.flip_h = true
 		velocity.x = -SPEED
-	if velocity.length() < 59 and is_on_floor() and Input.is_action_pressed("up"):
+		
+	if is_on_floor() and Input.is_action_pressed("up"):
 		state_machine.travel("OnGroundLookingUp")
 	if Input.is_action_just_pressed("jump") and is_on_floor() and move_able == true:
 		velocity.y = JUMPFORCE
@@ -69,7 +65,7 @@ func get_input():
 		state_machine.travel("Idle")
 	if velocity.length() > 59 and is_on_floor():
 		state_machine.travel("Run")
-	elif velocity.length() > 59 and is_on_floor() == false and Input.is_action_pressed("down"):
+	elif velocity.length() > 59 and !is_on_floor() and Input.is_action_pressed("down"):
 		state_machine.travel("LookingDown(OnlyInAir)")
 		Global.scale_x = 0
 	elif velocity.length() > 59 and is_on_floor() == false and Input.is_action_pressed("up"):
@@ -78,7 +74,8 @@ func get_input():
 	elif velocity.length() > 59 and is_on_floor() == false:
 		state_machine.travel("FallingNormal")
 	velocity.y += GRAVITY
-	velocity = move_and_slide(velocity,Vector2.UP)
+	move_and_slide(velocity,Vector2.UP)
+	#delete
 	velocity.x = lerp(velocity.x,0,0.2)
 func get_shoot_input():
 	if Input.is_action_just_pressed("shoot") and Input.is_action_pressed("down") and ammo_amount > 0:

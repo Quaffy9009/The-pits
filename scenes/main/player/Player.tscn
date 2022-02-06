@@ -113,7 +113,7 @@ states/RunPointingUp/node = SubResource( 25 )
 states/RunPointingUp/position = Vector2( 119, 162 )
 transitions = [ "Idle", "Run", SubResource( 26 ), "Run", "Idle", SubResource( 27 ), "Idle", "RunPointingUp", SubResource( 28 ), "RunPointingUp", "Idle", SubResource( 29 ), "Idle", "Damaged", SubResource( 30 ), "LookingDown(OnlyInAir)", "Idle", SubResource( 32 ), "Idle", "LookingDown(OnlyInAir)", SubResource( 33 ), "Run", "RunPointingUp", SubResource( 34 ), "Idle", "FallLookingUp", SubResource( 35 ), "FallLookingUp", "Idle", SubResource( 36 ), "Idle", "FallingNormal", SubResource( 37 ), "FallingNormal", "Idle", SubResource( 38 ), "FallingNormal", "FallLookingUp", SubResource( 39 ), "FallingNormal", "LookingDown(OnlyInAir)", SubResource( 40 ), "RunPointingUp", "Run", SubResource( 43 ), "Damaged", "Idle", SubResource( 44 ), "OnGroundLookUp", "Idle", SubResource( 57 ), "Idle", "OnGroundLookUp", SubResource( 58 ), "OnGroundLookUp", "FallLookingUp", SubResource( 59 ), "FallLookingUp", "OnGroundLookUp", SubResource( 60 ), "OnGroundLookUp", "Run", SubResource( 61 ), "Run", "OnGroundLookUp", SubResource( 62 ), "RunPointingUp", "OnGroundLookUp", SubResource( 63 ), "OnGroundLookUp", "RunPointingUp", SubResource( 64 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -28, 317 )
+graph_offset = Vector2( -63, 291 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=42]
 
@@ -204,6 +204,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=55]
 resource_name = "OnGroundLookUp"
 length = 0.1
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1

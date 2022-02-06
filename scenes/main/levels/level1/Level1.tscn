@@ -2172,7 +2172,7 @@ cur_camera_point_right = 1936
 cur_camera_point_left = 1632
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( -108, -185 )
+position = Vector2( -100, -180 )
 
 [node name="AnimationTree" parent="Player" index="2"]
 parameters/playback = SubResource( 50 )

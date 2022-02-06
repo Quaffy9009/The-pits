@@ -1,10 +1,8 @@
 extends Area2D
 
 #SPEED VARIABLES
-const SPEED_X_LEFT = -400
-const SPEED_X_RIGHT = 400
-const SPEED_Y_UP = -400
-const SPEED_Y_DOWN = 400
+const SPEED = 400
+
 
 #SHOOT DIRECTION VARIABLES
 var shootright = false
@@ -24,21 +22,21 @@ func _ready():
 		shootright = true
 func _physics_process(delta):
 	if shootleft == true:
-		position.x += SPEED_X_LEFT * delta
+		position.x += -SPEED * delta
 		$Sprite.show()
 		$Sprite1Coll.disabled = false
 		$Sprite.flip_h = true
 	elif shootright == true:
-		position.x += SPEED_X_RIGHT * delta
+		position.x += SPEED * delta
 		$Sprite.show()
 		$Sprite1Coll.disabled = false
 	elif shootup == true:
-		position.y += SPEED_Y_UP * delta
+		position.y += -SPEED * delta
 		$Sprite2.show()
 		$Sprite2Coll.disabled = false
 		$Sprite2.rotation_degrees = 270
 	elif shootdown == true:
-		position.y += SPEED_Y_DOWN * delta
+		position.y += SPEED * delta
 		$Sprite2.show()
 		$Sprite2Coll.disabled = false
 	if shootup == true or shootdown == true:
