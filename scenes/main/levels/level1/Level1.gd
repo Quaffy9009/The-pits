@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _physics_process(delta):
-	print($Player.position)
+	#print($Player.position)
 	print(Global.cur_room)
 	if Global.respawn == true:
 		respawn()
