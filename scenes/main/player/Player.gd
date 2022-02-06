@@ -26,7 +26,7 @@ var current
 
 #MOVEMENT VARIABLES
 var move_able = true
-var velocity = Vector2(0,0)
+var velocity = Vector2()
 const SPEED = 65
 var GRAVITY = 15
 const JUMPFORCE = -225
@@ -46,7 +46,7 @@ func _physics_process(delta):
 func get_gravity():
 	GRAVITY = Global.cur_gravity
 func get_input():
-	print(velocity.length())
+	#print(velocity.length())
 	if $Sprite.scale.x == 4:
 		Global.scale_x = 4
 	elif $Sprite.scale.x == -4:
