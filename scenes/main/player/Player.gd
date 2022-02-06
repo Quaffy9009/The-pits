@@ -13,6 +13,7 @@ var cur_game_sa = 0
 var shootinga 
 var shot = false
 var shooting = false
+var reload_time = 15
 var shoot_able = true
 var ammo_amount = 2
 var max_ammo_amount = 2
@@ -27,7 +28,7 @@ var current
 #MOVEMENT VARIABLES
 var move_able = true
 
-const SHOOTFORCE = -260 # height when shooting down
+export var SHOOTFORCE = -260 # height when shooting down
 const HITBACK = -40
 
 var tick = false
@@ -70,7 +71,10 @@ func _process(delta):
 		max_speed += jump_slowing_down
 		has_jumped = false
 		tick = false
-
+	#saves player direction globaly
+	Global.direction = direction
+	#saves if player is touching floor globaly
+	Global.is_on_floor = is_on_floor()
 
 func _physics_process(delta):
 	get_gravity()
@@ -107,8 +111,14 @@ func get_input():
 	#print(fall_gravity)
 	current = state_machine.get_current_node()
 	move_and_slide(velocity,Vector2.UP)
+	#if youre not moving 
 	if velocity.x == 0:
-		$AnimationPlayer.play("Idle")
+		if Input.is_action_pressed("up"):
+			$AnimationPlayer.play("OnGroundLookUp")
+		elif Input.is_action_pressed("down") and !is_on_floor():
+			$AnimationPlayer.play("LookingDown(OnlyInAir)")
+		else:  
+			$AnimationPlayer.play("Idle")
 	if move_able:
 		#acceleration 
 		if is_moving:
@@ -120,6 +130,7 @@ func get_input():
 		if Input.is_action_pressed("left"):
 			is_moving = true
 			direction = "left"
+			
 			$Sprite.flip_h = true
 			if Input.is_action_pressed("up"):
 				$AnimationPlayer.play("RunPointingUp")
@@ -128,7 +139,10 @@ func get_input():
 		elif Input.is_action_pressed("right"):
 			is_moving = true
 			direction = "right"
-			$AnimationPlayer.play("Run")
+			if Input.is_action_pressed("up"):
+				$AnimationPlayer.play("RunPointingUp")
+			else:  
+				$AnimationPlayer.play("Run")
 			$Sprite.flip_h = false
 		else: 
 			
@@ -141,29 +155,16 @@ func get_input():
 		velocity.y = maxfallspeed
 	
 	
-	if is_on_floor() and Input.is_action_pressed("up"):
-		state_machine.travel("OnGroundLookingUp")
 	
-	
-		
-	#if velocity.length() <= 59:
-	#	state_machine.travel("Idle")
-	#if velocity.length() > 59 and is_on_floor():
-	#	state_machine.travel("Run")
-	#elif velocity.length() > 59 and !is_on_floor() and Input.is_action_pressed("down"):
-	#	state_machine.travel("LookingDown(OnlyInAir)")
-	#	Global.scale_x = 0
-	#elif velocity.length() > 59 and is_on_floor() == false and Input.is_action_pressed("up"):
-	#	state_machine.travel("FallLookingUp")
-	#	Global.scale_x = 0
-	#elif velocity.length() > 59 and is_on_floor() == false:
-	#	state_machine.travel("FallingNormal")
-	
+	#falling animation
+	if velocity.y > 0 and !is_on_floor():
+		$AnimationPlayer.play("FallingNormal")
 	
 
 func jump(): #jumping
 	velocity.y = jump_velocity
 	$Sounds/JumpSound.play()
+	
 
 func acceleration():
 	if velocity.x < max_speed and direction == "right":
@@ -185,19 +186,24 @@ func deceleration():
 func get_shoot_input():
 	if Input.is_action_just_pressed("shoot") and Input.is_action_pressed("down") and ammo_amount > 0:
 		shot = true
-		velocity.y = SHOOTFORCE
-		ammo_amount = ammo_amount - 1
-		print(ammo_amount)
-		$Sounds/ShootSound1.play()
-		shoot()
+		if !is_on_floor():
+			velocity.y = SHOOTFORCE
+			ammo_amount = ammo_amount - 1
+			print(ammo_amount)
+			$Sounds/ShootSound1.play()
+			shoot()
 	elif Input.is_action_just_pressed("shoot") and ammo_amount > 0:
 		shot = true
 		ammo_amount = ammo_amount - 1
 		print(ammo_amount)
 		$Sounds/ShootSound1.play()
 		shoot()
-	if is_on_floor():
-		ammo_amount = max_ammo_amount
+	if is_on_floor() and ammo_amount == 0:
+		if reload_time > 0:
+			reload_time -=1
+		else:
+			reload_time = 15
+			ammo_amount = max_ammo_amount
 	if ammo_amount == 2:
 		$HUD/ShotUI/Sprite3.show()
 	elif ammo_amount == 1:

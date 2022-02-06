@@ -14,11 +14,11 @@ var shootup = false
 func _ready():
 	if Input.is_action_pressed("up"):
 		shootup = true
-	elif Input.is_action_pressed("down"):
+	elif Input.is_action_pressed("down") and !Global.is_on_floor:
 		shootdown = true
-	elif Global.scale_x == -4:
+	elif Global.direction == "left":
 		shootleft = true
-	elif Global.scale_x == 4:
+	elif Global.direction == "right":
 		shootright = true
 func _physics_process(delta):
 	if shootleft == true:

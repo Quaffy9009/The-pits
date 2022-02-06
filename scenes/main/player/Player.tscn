@@ -345,6 +345,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=48]
 length = 0.001
@@ -389,6 +401,7 @@ extents = Vector2( 3.5, 4 )
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 4242
 script = ExtResource( 13 )
+SHOOTFORCE = -150
 deceleration = 20
 jump_slowing_down = 25
 jump_height = 20.0
@@ -405,7 +418,7 @@ position = Vector2( 0, 1 )
 texture = ExtResource( 8 )
 hframes = 6
 vframes = 6
-frame = 21
+frame = 6
 region_rect = Rect2( 24, 14, 12, 14 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -593,18 +606,30 @@ volume_db = -30.0
 [node name="SpikeTDT" type="Area2D" parent="."]
 collision_layer = 32768
 collision_mask = 16384
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeTDT"]
 position = Vector2( -1.5, 1.5 )
 shape = SubResource( 53 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CameraPointDetector" type="Area2D" parent="."]
 collision_layer = 131072
 collision_mask = 65536
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraPointDetector"]
 position = Vector2( -1.5, 2 )
 shape = SubResource( 54 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="PlayerFallTest" type="Sprite" parent="."]
 visible = false
