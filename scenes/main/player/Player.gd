@@ -53,7 +53,7 @@ export var lowfallMultiplier = 1
 onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
-
+export var maxfallspeed = 200
 
 
 
@@ -103,9 +103,12 @@ func get_gravity() -> float:  #sets gravity type
 
 
 func get_input():
-	#print(velocity.length())
-	current = state_machine.get_current_node()
 	
+	#print(fall_gravity)
+	current = state_machine.get_current_node()
+	move_and_slide(velocity,Vector2.UP)
+	if velocity.x == 0:
+		$AnimationPlayer.play("Idle")
 	if move_able:
 		#acceleration 
 		if is_moving:
@@ -118,15 +121,25 @@ func get_input():
 			is_moving = true
 			direction = "left"
 			$Sprite.flip_h = true
+			if Input.is_action_pressed("up"):
+				$AnimationPlayer.play("RunPointingUp")
+			else:  
+				$AnimationPlayer.play("Run")
 		elif Input.is_action_pressed("right"):
 			is_moving = true
 			direction = "right"
+			$AnimationPlayer.play("Run")
 			$Sprite.flip_h = false
 		else: 
 			
 			is_moving = false
 			deceleration()
 		
+	
+	#max falling speed
+	if velocity.y > maxfallspeed:
+		velocity.y = maxfallspeed
+	
 	
 	if is_on_floor() and Input.is_action_pressed("up"):
 		state_machine.travel("OnGroundLookingUp")
@@ -146,7 +159,7 @@ func get_input():
 	#elif velocity.length() > 59 and is_on_floor() == false:
 	#	state_machine.travel("FallingNormal")
 	
-	move_and_slide(velocity,Vector2.UP)
+	
 
 func jump(): #jumping
 	velocity.y = jump_velocity
@@ -217,43 +230,7 @@ func get_health():
 	if Global.ge2_damage == true:
 		health -= 4
 		Global.ge2_damage = false
-	if health == 6:
-		$HUD/HeartUI/Hearts3.show()
-	elif health == 5:
-		$HUD/HeartUI/Hearts3.hide()
-		$HUD/HeartUI/HHearts2.show()
-	elif health == 4:
-		$HUD/HeartUI/Hearts3.hide()
-		$HUD/HeartUI/HHearts2.hide()
-		$HUD/HeartUI/Hearts2.show()
-	elif health == 3:
-		$HUD/HeartUI/Hearts3.hide()
-		$HUD/HeartUI/HHearts2.hide()
-		$HUD/HeartUI/Hearts2.hide()
-		$HUD/HeartUI/HHearts1.show()
-	elif health == 2:
-		$HUD/HeartUI/Hearts3.hide()
-		$HUD/HeartUI/HHearts2.hide()
-		$HUD/HeartUI/Hearts2.hide()
-		$HUD/HeartUI/HHearts1.hide()
-		$HUD/HeartUI/Hearts1.show()
-	elif health == 1:
-		$HUD/HeartUI/Hearts3.hide()
-		$HUD/HeartUI/HHearts2.hide()
-		$HUD/HeartUI/Hearts2.hide()
-		$HUD/HeartUI/HHearts1.hide()
-		$HUD/HeartUI/Hearts1.hide()
-		$HUD/HeartUI/HHearts.show()
-	else:
-		$HUD/HeartUI/Hearts3.hide()
-		$HUD/HeartUI/HHearts2.hide()
-		$HUD/HeartUI/Hearts2.hide()
-		$HUD/HeartUI/HHearts1.hide()
-		$HUD/HeartUI/Hearts1.hide()
-		$HUD/HeartUI/HHearts.hide()
-		$HUD/HeartUI/Hearts0.show()
-		Global.shell_amount = Global.shell_amount - cur_game_sa
-		get_tree().change_scene("res://scenes/main/levels/level1/Level1.tscn")
+	
 func shell_amount_func():
 	if Global.add_cur_game_sa == true:
 		cur_game_sa += 1
