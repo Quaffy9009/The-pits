@@ -16,9 +16,9 @@ func _ready():
 		shootup = true
 	elif Input.is_action_pressed("down") and !Global.is_on_floor:
 		shootdown = true
-	elif Global.direction == "left":
+	elif Global.direction == -1:
 		shootleft = true
-	elif Global.direction == "right":
+	elif Global.direction == 1:
 		shootright = true
 func _physics_process(delta):
 	if shootleft == true:
