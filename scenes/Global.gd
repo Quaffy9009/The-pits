@@ -14,8 +14,8 @@ var cur_room = 1
 var testing_camera = false
 var respawn = false
 var md = false
-var scale_x = 4
-
+var direction
+var is_on_floor
 #PLAYER DAMAGE VARIABLES
 var ge1_damage = false
 var ge2_damage = false
