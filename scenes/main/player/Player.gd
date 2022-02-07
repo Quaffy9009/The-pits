@@ -178,7 +178,7 @@ func get_input():
 	
 	#wall jumping and sliding
 	if !is_on_floor() and wall_direction != 0:
-		wall_jumping()
+		#wall_jumping()
 		if Input.is_action_pressed("left") and wall_direction == -1 and velocity.y > 0:
 			velocity.y = max_wall_slide_speed
 		elif Input.is_action_pressed("right") and wall_direction == 1 and velocity.y > 0:
@@ -217,7 +217,7 @@ func deceleration():
 	else: velocity.x = 0
 
 func wall_jumping():
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and move_able:
 		has_wall_jumped = true
 		var wall_jump_velocity = Wall_jump_Velocity
 		wall_jump_velocity.x *= -wall_direction 
