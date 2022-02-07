@@ -3,10 +3,6 @@ extends Node2D
 
 #POSITION VARIABLES
 var last_position = Vector2(0,0)
-var cur_camera_point_top #-1408
-var cur_camera_point_bottom #576
-var cur_camera_point_right #480
-var cur_camera_point_left #-4160
 
 #MAIN VARIABLES
 var cur_gravity = 50

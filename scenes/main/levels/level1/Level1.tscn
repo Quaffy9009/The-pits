@@ -1,6 +1,6 @@
 [gd_scene load_steps=39 format=2]
 
-[ext_resource path="res://scenes/other/CameraPoint.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/other/Camera_switch_point.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/main/enemys/ground/GroundEnemy1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/TileSets/factoryish tileset.png" type="Texture" id=3]
 [ext_resource path="res://scenes/main/player/Player.tscn" type="PackedScene" id=4]
@@ -1843,6 +1843,10 @@ __meta__ = {
 }
 
 [node name="Background" type="Node2D" parent="."]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="ColorRect" type="ColorRect" parent="Background"]
 margin_left = -5991.0
@@ -1970,7 +1974,31 @@ last_position = Vector2( -576, 552 )
 position = Vector2( -928, 552 )
 last_position = Vector2( -928, 552 )
 
+[node name="Cameras" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Cameras"]
+position = Vector2( -16, -208 )
+current = true
+zoom = Vector2( 0.3, 0.3 )
+
+[node name="Camera2D2" type="Camera2D" parent="Cameras"]
+position = Vector2( 216, -208 )
+zoom = Vector2( 0.3, 0.3 )
+
+[node name="CameraPoint" type="Node2D" parent="."]
+position = Vector2( 0, -40 )
+
+[node name="Area2D" parent="CameraPoint" instance=ExtResource( 1 )]
+position = Vector2( 96, -128 )
+current_camera = NodePath("../../Cameras/Camera2D")
+switch_to_right = NodePath("../../Cameras/Camera2D2")
+player = NodePath("../../Player")
+
 [node name="Enemys" type="Node2D" parent="."]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Ground" type="Node2D" parent="Enemys"]
 
@@ -1982,313 +2010,6 @@ position = Vector2( 416, -192 )
 direction = 1
 
 [node name="Air" type="Node2D" parent="Enemys"]
-
-[node name="CamerPoints" type="Node2D" parent="."]
-
-[node name="CameraPoint1" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( -104, -112 )
-cur_camera_point_top = -280
-cur_camera_point_bottom = 112
-cur_camera_point_right = 96
-cur_camera_point_left = -832
-
-[node name="CameraPoint40" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 104, -208 )
-cur_camera_point_top = -280
-cur_camera_point_bottom = 112
-cur_camera_point_right = 96
-cur_camera_point_left = -832
-cur_gravity = 15
-
-[node name="CameraPoint2" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 112, -208 )
-cur_camera_point_top = -240
-cur_camera_point_bottom = -168
-cur_camera_point_right = 464
-cur_camera_point_left = 112
-
-[node name="CameraPoint12" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 472, -208 )
-cur_camera_point_top = -240
-cur_camera_point_bottom = -168
-cur_camera_point_right = 464
-cur_camera_point_left = 112
-
-[node name="CameraPoint11" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 480, -208 )
-cur_camera_point_top = -232
-cur_camera_point_bottom = -120
-cur_camera_point_right = 1304
-cur_camera_point_left = 480
-
-[node name="CameraPoint3" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1112, -104 )
-rotation = 1.57129
-cur_camera_point_top = -104
-cur_camera_point_bottom = 448
-cur_camera_point_right = 1176
-cur_camera_point_left = 1040
-cur_gravity = -2
-
-[node name="CameraPoint4" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1104, 464 )
-rotation = 1.5708
-cur_camera_point_top = 464
-cur_camera_point_bottom = 560
-cur_camera_point_right = 1176
-cur_camera_point_left = 1032
-cur_gravity = -1
-one_time_pass = true
-
-[node name="CameraPoint13" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1104, 544 )
-rotation = 1.5708
-cur_camera_point_top = 464
-cur_camera_point_bottom = 560
-cur_camera_point_right = 1176
-cur_camera_point_left = 1032
-
-[node name="CameraPoint5" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1032, 536 )
-cur_camera_point_top = 464
-cur_camera_point_bottom = 560
-cur_camera_point_right = 1176
-cur_camera_point_left = 1032
-
-[node name="CameraPoint6" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1024, 536 )
-cur_camera_point_top = 504
-cur_camera_point_bottom = 576
-cur_camera_point_right = 1016
-cur_camera_point_left = 856
-
-[node name="CameraPoint14" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 856, 536 )
-cur_camera_point_top = 504
-cur_camera_point_bottom = 576
-cur_camera_point_right = 1016
-cur_camera_point_left = 856
-
-[node name="CameraPoint15" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 848, 536 )
-cur_camera_point_top = 488
-cur_camera_point_bottom = 576
-cur_camera_point_right = 840
-cur_camera_point_left = 672
-
-[node name="CameraPoint16" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 672, 536 )
-cur_camera_point_top = 488
-cur_camera_point_bottom = 576
-cur_camera_point_right = 840
-cur_camera_point_left = 672
-
-[node name="CameraPoint17" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 664, 536 )
-cur_camera_point_top = 328
-cur_camera_point_bottom = 560
-cur_camera_point_right = 656
-cur_camera_point_left = 392
-
-[node name="CameraPoint18" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 392, 536 )
-cur_camera_point_top = 328
-cur_camera_point_bottom = 560
-cur_camera_point_right = 656
-cur_camera_point_left = 392
-
-[node name="CameraPoint19" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 384, 536 )
-cur_camera_point_top = 504
-cur_camera_point_bottom = 584
-cur_camera_point_right = 376
-cur_camera_point_left = 56
-
-[node name="CameraPoint20" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 56, 536 )
-cur_camera_point_top = 504
-cur_camera_point_bottom = 584
-cur_camera_point_right = 376
-cur_camera_point_left = 56
-
-[node name="CameraPoint21" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 48, 536 )
-cur_camera_point_top = 504
-cur_camera_point_bottom = 864
-cur_camera_point_right = 40
-cur_camera_point_left = -432
-
-[node name="CameraPoint22" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( -432, 576 )
-cur_camera_point_top = 504
-cur_camera_point_bottom = 864
-cur_camera_point_right = 40
-cur_camera_point_left = -432
-
-[node name="CameraPoint42" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( -440, 576 )
-cur_camera_point_top = 504
-cur_camera_point_bottom = 632
-cur_camera_point_right = -448
-cur_camera_point_left = -968
-
-[node name="CameraPoint23" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( -432, 832 )
-cur_camera_point_top = 504
-cur_camera_point_bottom = 864
-cur_camera_point_right = 40
-cur_camera_point_left = -432
-
-[node name="CameraPoint24" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 40, 832 )
-cur_camera_point_top = 504
-cur_camera_point_bottom = 864
-cur_camera_point_right = 40
-cur_camera_point_left = -432
-
-[node name="CameraPoint25" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 48, 832 )
-cur_camera_point_top = 784
-cur_camera_point_bottom = 864
-cur_camera_point_right = 592
-cur_camera_point_left = 48
-
-[node name="CameraPoint26" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 600, 832 )
-cur_camera_point_top = 784
-cur_camera_point_bottom = 864
-cur_camera_point_right = 592
-cur_camera_point_left = 48
-
-[node name="CameraPoint27" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 280, 784 )
-rotation = 1.5708
-cur_camera_point_top = 784
-cur_camera_point_bottom = 864
-cur_camera_point_right = 592
-cur_camera_point_left = 48
-
-[node name="CameraPoint28" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 280, 776 )
-rotation = 1.5708
-cur_camera_point_top = 696
-cur_camera_point_bottom = 768
-cur_camera_point_right = 328
-cur_camera_point_left = 168
-
-[node name="CameraPoint29" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 336, 744 )
-cur_camera_point_top = 696
-cur_camera_point_bottom = 768
-cur_camera_point_right = 328
-cur_camera_point_left = 168
-
-[node name="CameraPoint30" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 344, 744 )
-cur_camera_point_top = 656
-cur_camera_point_bottom = 768
-cur_camera_point_right = 512
-cur_camera_point_left = 344
-
-[node name="CameraPoint7" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1192, 536 )
-cur_camera_point_top = 496
-cur_camera_point_bottom = 568
-cur_camera_point_right = 1400
-cur_camera_point_left = 1192
-
-[node name="CameraPoint8" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1184, 536 )
-cur_camera_point_top = 464
-cur_camera_point_bottom = 560
-cur_camera_point_right = 1176
-cur_camera_point_left = 1032
-
-[node name="CameraPoint9" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1408, 536 )
-cur_camera_point_top = 496
-cur_camera_point_bottom = 568
-cur_camera_point_right = 1400
-cur_camera_point_left = 1192
-
-[node name="CameraPoint10" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1416, 536 )
-cur_camera_point_top = 480
-cur_camera_point_bottom = 560
-cur_camera_point_right = 1616
-cur_camera_point_left = 1416
-
-[node name="CameraPoint31" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1624, 536 )
-cur_camera_point_top = 480
-cur_camera_point_bottom = 560
-cur_camera_point_right = 1616
-cur_camera_point_left = 1416
-
-[node name="CameraPoint32" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1632, 536 )
-cur_camera_point_top = 520
-cur_camera_point_bottom = 856
-cur_camera_point_right = 1936
-cur_camera_point_left = 1632
-
-[node name="CameraPoint33" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1632, 696 )
-cur_camera_point_top = 520
-cur_camera_point_bottom = 856
-cur_camera_point_right = 1936
-cur_camera_point_left = 1632
-
-[node name="CameraPoint36" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1624, 696 )
-cur_camera_point_top = 664
-cur_camera_point_bottom = 712
-cur_camera_point_right = 1616
-cur_camera_point_left = 1424
-
-[node name="CameraPoint34" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1632, 832 )
-cur_camera_point_top = 520
-cur_camera_point_bottom = 856
-cur_camera_point_right = 1936
-cur_camera_point_left = 1632
-
-[node name="CameraPoint37" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1624, 832 )
-cur_camera_point_top = 688
-cur_camera_point_bottom = 880
-cur_camera_point_right = 1616
-cur_camera_point_left = 608
-
-[node name="CameraPoint38" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 608, 832 )
-cur_camera_point_top = 688
-cur_camera_point_bottom = 880
-cur_camera_point_right = 1616
-cur_camera_point_left = 608
-
-[node name="CameraPoint39" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 992, 888 )
-rotation = 1.5708
-cur_camera_point_top = 688
-cur_camera_point_bottom = 880
-cur_camera_point_right = 1616
-cur_camera_point_left = 608
-
-[node name="CameraPoint41" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 992, 896 )
-rotation = 1.5708
-cur_camera_point_top = 896
-cur_camera_point_bottom = 1024
-cur_camera_point_right = 1296
-cur_camera_point_left = 968
-
-[node name="CameraPoint35" parent="CamerPoints" instance=ExtResource( 1 )]
-position = Vector2( 1944, 728 )
-cur_camera_point_top = 520
-cur_camera_point_bottom = 856
-cur_camera_point_right = 1936
-cur_camera_point_left = 1632
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( -100, -180 )
