@@ -54,7 +54,9 @@ export var lowfallMultiplier = 1
 onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
+
 export var maxfallspeed = 200
+var has_pressed_jump = false
 
 
 
@@ -71,10 +73,17 @@ func _process(delta):
 		max_speed += jump_slowing_down
 		has_jumped = false
 		tick = false
+		has_pressed_jump = false
 	#saves player direction globaly
 	Global.direction = direction
 	#saves if player is touching floor globaly
 	Global.is_on_floor = is_on_floor()
+	
+	#removes y velocity when on ground
+	if is_on_floor() and !has_pressed_jump:
+		velocity.y = 1
+
+
 
 func _physics_process(delta):
 	get_gravity()
@@ -94,13 +103,15 @@ func _physics_process(delta):
 			tick = true
 		has_jumped = true
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor() and move_able:
-		jump()
+	if Input.is_action_just_pressed("jump") and move_able:
+		has_pressed_jump = true
+		if is_on_floor():
+			jump()
 	
 	#low jumping
 	if has_jumped and Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y += lowfallMultiplier
-
+	
 
 func get_gravity() -> float:  #sets gravity type
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
@@ -108,7 +119,7 @@ func get_gravity() -> float:  #sets gravity type
 
 func get_input():
 	
-	#print(fall_gravity)
+	print(velocity.y)
 	current = state_machine.get_current_node()
 	move_and_slide(velocity,Vector2.UP)
 	#if youre not moving 
@@ -153,6 +164,10 @@ func get_input():
 	#max falling speed
 	if velocity.y > maxfallspeed:
 		velocity.y = maxfallspeed
+	
+	#stops y velocity if you hit ceiling
+	if is_on_ceiling():
+		velocity.y = 0
 	
 	
 	
