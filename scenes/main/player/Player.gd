@@ -57,6 +57,7 @@ onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent
 
 export var maxfallspeed = 200
 var has_pressed_jump = false
+var jumped_straight = false
 
 #wall stuff variables
 onready var left_wall_raycasts = $WallRaycastsLeft
@@ -79,6 +80,7 @@ func _process(delta):
 		max_speed += jump_slowing_down
 		has_jumped = false
 		has_wall_jumped = false
+		jumped_straight = false
 		tick = false
 	
 	#saves player direction globaly
@@ -98,7 +100,7 @@ func _physics_process(delta):
 	get_health()
 	shell_amount_func()
 	_update_wall_directions()
-	#print(wall_direction)
+	#print(jumped_straight)
 	
 	#lowers max speed if in air
 	if !is_on_floor():
@@ -109,11 +111,14 @@ func _physics_process(delta):
 			tick = true
 			has_pressed_jump = false
 		has_jumped = true
+		
 	
 	if Input.is_action_just_pressed("jump") and move_able:
 		has_pressed_jump = true
 		if is_on_floor():
 			jump()
+			if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
+				jumped_straight = true
 	
 	#low jumping
 	if has_jumped and Input.is_action_just_released("jump") and velocity.y < 0:
@@ -163,7 +168,6 @@ func get_input():
 				$AnimationPlayer.play("Run")
 			$Sprite.flip_h = false
 		else: 
-			
 			is_moving = false
 			deceleration()
 		
@@ -175,6 +179,12 @@ func get_input():
 	#removes y velocity when on ground
 	if is_on_floor() and !has_pressed_jump:
 		velocity.y = 1
+	
+	
+	#stops y velocity if you hit ceiling
+	if is_on_ceiling():
+		velocity.y = 0
+	
 	
 	#wall jumping and sliding
 	if !is_on_floor() and wall_direction != 0:
@@ -194,7 +204,7 @@ func get_input():
 func jump(): #jumping
 	velocity.y = jump_velocity
 	$Sounds/JumpSound.play()
-	
+	 
 
 func acceleration():
 	if velocity.x < max_speed and direction == 1:
@@ -212,7 +222,7 @@ func deceleration():
 		velocity.x += deceleration
 	elif (wall_direction !=0 and !is_on_floor()) or has_wall_jumped:
 		velocity.x += deceleration * wall_direction *6
-	elif !is_on_floor() and has_jumped:
+	elif !is_on_floor() and has_jumped and velocity.y > 0 and !jumped_straight:
 		velocity.x += deceleration * direction * 4
 	else: velocity.x = 0
 
