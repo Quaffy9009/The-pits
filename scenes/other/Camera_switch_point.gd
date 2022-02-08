@@ -4,7 +4,7 @@ export (NodePath) var current_camera
 export (NodePath) var switch_to_left
 export (NodePath) var switch_to_right
 export (NodePath) var player
-
+export var vertical = true
 
 export var one_time_pass = false
 
@@ -33,8 +33,9 @@ func _on_Area2D_body_exited(body):
 			get_node(player).get_node("RemoteTransform2D").set_remote_node(switch_to_right)
 
 func _process(delta):
-	get_node(switch_to_left).limit_right = $camera_limit_right.global_position.x
-	get_node(switch_to_right).limit_left = $camera_limit_left.global_position.x
+	if vertical:
+		get_node(switch_to_left).limit_right = $camera_limit_right.global_position.x
+		get_node(switch_to_right).limit_left = $camera_limit_left.global_position.x
 
 
 
