@@ -118,8 +118,8 @@ func _physics_process(delta):
 	
 	var was_grounded = is_grounded
 	is_grounded = is_on_floor()
-	if was_grounded == null or was_grounded != is_grounded:
-		emit_signal("grounded_updated", is_on_floor())
+	#if was_grounded == null or was_grounded != is_grounded:
+	emit_signal("grounded_updated", is_on_floor())
 	
 	
 	
@@ -142,7 +142,7 @@ func get_gravity() -> float:  #sets gravity type
 
 func get_input():
 	
-	print(max_speed)
+	#print(max_speed)
 	current = state_machine.get_current_node()
 	move_and_slide(velocity,Vector2.UP)
 	#if youre not moving 
