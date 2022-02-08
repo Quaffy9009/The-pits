@@ -56,7 +56,7 @@ export var lowfallMultiplier = 1
 
 onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
-onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
+onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0 * 0.5
 
 export var maxfallspeed = 200
 var has_pressed_jump = false
@@ -104,7 +104,7 @@ func _physics_process(delta):
 	get_health()
 	shell_amount_func()
 	_update_wall_directions()
-	#print(jumped_straight)
+	#print(velocity.y)
 	
 	#lowers max speed if in air
 	if !is_on_floor():
@@ -118,8 +118,8 @@ func _physics_process(delta):
 	
 	var was_grounded = is_grounded
 	is_grounded = is_on_floor()
-	#if was_grounded == null or was_grounded != is_grounded:
-	emit_signal("grounded_updated", is_on_floor())
+	if was_grounded == null or was_grounded != is_grounded:
+		emit_signal("grounded_updated", is_on_floor())
 	
 	
 	

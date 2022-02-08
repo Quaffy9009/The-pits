@@ -1982,10 +1982,10 @@ position = Vector2( -104, -186 )
 current = true
 
 [node name="Camera2" parent="Cameras" instance=ExtResource( 8 )]
-position = Vector2( 160, -184 )
+position = Vector2( 160, -208 )
 
 [node name="Camera3" parent="Cameras" instance=ExtResource( 8 )]
-position = Vector2( 584, -184 )
+position = Vector2( 592, -200 )
 
 [node name="Camera4" type="Camera2D" parent="Cameras"]
 position = Vector2( 1058, -54 )
@@ -2027,7 +2027,6 @@ vertical = false
 [node name="CameraPoint4" parent="CameraPoint" instance=ExtResource( 1 )]
 position = Vector2( 980, 496 )
 rotation = 1.5708
-enabled = false
 current_camera = NodePath("../../Cameras/Camera4")
 switch_to_left = NodePath("../../Cameras/Camera4")
 switch_to_right = NodePath("../../Cameras/Camera5")
