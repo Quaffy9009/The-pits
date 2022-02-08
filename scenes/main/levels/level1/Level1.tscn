@@ -1992,6 +1992,16 @@ position = Vector2( 584, -208 )
 zoom = Vector2( 0.2, 0.2 )
 smoothing_enabled = true
 
+[node name="Camera4" type="Camera2D" parent="Cameras"]
+position = Vector2( 1107, -47 )
+zoom = Vector2( 0.2, 0.2 )
+smoothing_enabled = true
+
+[node name="Camera5" type="Camera2D" parent="Cameras"]
+position = Vector2( 1107, 516 )
+zoom = Vector2( 0.2, 0.2 )
+smoothing_enabled = true
+
 [node name="CameraPoint" type="Node2D" parent="."]
 position = Vector2( 0, -40 )
 
@@ -2007,6 +2017,22 @@ position = Vector2( 504, -56 )
 current_camera = NodePath("../../Cameras/Camera2")
 switch_to_left = NodePath("../../Cameras/Camera2")
 switch_to_right = NodePath("../../Cameras/Camera3")
+player = NodePath("../../Player")
+
+[node name="CameraPoint3" parent="CameraPoint" instance=ExtResource( 1 )]
+position = Vector2( 1002, -73 )
+rotation = 1.5708
+current_camera = NodePath("../../Cameras/Camera3")
+switch_to_left = NodePath("../../Cameras/Camera3")
+switch_to_right = NodePath("../../Cameras/Camera4")
+player = NodePath("../../Player")
+
+[node name="CameraPoint4" parent="CameraPoint" instance=ExtResource( 1 )]
+position = Vector2( 980, 496 )
+rotation = 1.5708
+current_camera = NodePath("../../Cameras/Camera4")
+switch_to_left = NodePath("../../Cameras/Camera4")
+switch_to_right = NodePath("../../Cameras/Camera5")
 player = NodePath("../../Player")
 
 [node name="Enemys" type="Node2D" parent="."]
