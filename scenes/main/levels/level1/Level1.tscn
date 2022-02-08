@@ -1978,7 +1978,7 @@ last_position = Vector2( -928, 552 )
 [node name="Cameras" type="Node2D" parent="."]
 
 [node name="Camera1" parent="Cameras" instance=ExtResource( 8 )]
-position = Vector2( -104, -176 )
+position = Vector2( 864, -234 )
 current = true
 
 [node name="Camera2" parent="Cameras" instance=ExtResource( 8 )]
@@ -2022,9 +2022,11 @@ direction = 1
 [node name="Air" type="Node2D" parent="Enemys"]
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( -104, -166 )
+position = Vector2( 864, -224 )
 acceleration = 20
 deceleration = 10
+max_speed = 75
+jump_slowing_down = 10
 
 [node name="AnimationTree" parent="Player" index="2"]
 parameters/playback = SubResource( 50 )

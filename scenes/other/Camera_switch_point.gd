@@ -10,11 +10,6 @@ export var one_time_pass = false
 
 
 func _on_Area2D_body_entered(body):
-	pass
-	
-
-
-func _on_Area2D_body_exited(body):
 	if one_time_pass and body.is_in_group("player"):
 		$StaticBody2D/CollisionShape2D.set_deferred("disabled", false)
 		print("S")
@@ -31,6 +26,11 @@ func _on_Area2D_body_exited(body):
 			get_node(switch_to_right).current = true
 			current_camera = switch_to_right
 			get_node(player).get_node("RemoteTransform2D").set_remote_node(switch_to_right)
+	
+
+
+func _on_Area2D_body_exited(body):
+	pass
 
 func _process(delta):
 	if vertical:

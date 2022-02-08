@@ -33,6 +33,7 @@ var move_able = true
 export var SHOOTFORCE = -260 # height when shooting down
 const HITBACK = -40
 
+var is_grounded
 var tick = false
 var current_speed = 0
 var is_moving = false
@@ -75,11 +76,12 @@ func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 	
 	#for some reason has_jumped fires off without a reason
-	max_speed -= jump_slowing_down
+	#max_speed -= jump_slowing_down
 
 func _process(delta):
 	if (has_jumped or has_wall_jumped) and is_on_floor():
-		max_speed += jump_slowing_down
+		if has_jumped:
+			max_speed += jump_slowing_down
 		has_jumped = false
 		has_wall_jumped = false
 		jumped_straight = false
@@ -114,8 +116,9 @@ func _physics_process(delta):
 			has_pressed_jump = false
 		has_jumped = true
 	
-	
-	if has_jumped:
+	var was_grounded = is_grounded
+	is_grounded = is_on_floor()
+	if was_grounded == null or was_grounded != is_grounded:
 		emit_signal("grounded_updated", is_on_floor())
 	
 	
@@ -139,7 +142,7 @@ func get_gravity() -> float:  #sets gravity type
 
 func get_input():
 	
-	#print(velocity.y)
+	print(max_speed)
 	current = state_machine.get_current_node()
 	move_and_slide(velocity,Vector2.UP)
 	#if youre not moving 
@@ -220,7 +223,6 @@ func acceleration():
 	elif velocity.x > -max_speed and direction == -1:
 		velocity.x -= acceleration / 2
 	else:
-		#current_speed = max_speed
 		velocity.x = max_speed * sign(velocity.x)
 
 func deceleration():
