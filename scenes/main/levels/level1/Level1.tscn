@@ -1982,10 +1982,10 @@ position = Vector2( -104, -176 )
 current = true
 
 [node name="Camera2" parent="Cameras" instance=ExtResource( 8 )]
-position = Vector2( 168, -208 )
+position = Vector2( 160, -184 )
 
 [node name="Camera4" parent="Cameras" instance=ExtResource( 8 )]
-position = Vector2( 584, -208 )
+position = Vector2( 584, -184 )
 
 [node name="CameraPoint" type="Node2D" parent="."]
 position = Vector2( 0, -40 )
@@ -2032,5 +2032,7 @@ parameters/playback = SubResource( 50 )
 [node name="RemoteTransform2D" parent="Player" index="11"]
 position = Vector2( 0, -10 )
 remote_path = NodePath("../../Cameras/Camera1")
+
+[connection signal="grounded_updated" from="Player" to="Cameras/Camera1" method="_on_Player_grounded_updated"]
 
 [editable path="Player"]

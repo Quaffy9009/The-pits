@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal grounded_updated(is_grounded)
+
 #HEALTH VARIABLES
 var health = 7
 var max_health = 6
@@ -111,7 +113,13 @@ func _physics_process(delta):
 			tick = true
 			has_pressed_jump = false
 		has_jumped = true
-		
+	
+	
+	if has_jumped:
+		emit_signal("grounded_updated", is_on_floor())
+	
+	
+	
 	
 	if Input.is_action_just_pressed("jump") and move_able:
 		has_pressed_jump = true
