@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scenes/other/Camera_switch_point.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/main/enemys/ground/GroundEnemy1.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/other/objects/Checkpoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/main/levels/level1/Level1.gd" type="Script" id=6]
 [ext_resource path="res://assets/TileSets/Rocks.png" type="Texture" id=7]
+[ext_resource path="res://scenes/other/Camera.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/TileSets/Prototype8x8.png" type="Texture" id=13]
 [ext_resource path="res://assets/TileSets/UndertheSeaTileset.png" type="Texture" id=14]
 [ext_resource path="res://assets/TileSets/GrassTileset8x8.png" type="Texture" id=15]
@@ -1976,27 +1977,21 @@ last_position = Vector2( -928, 552 )
 
 [node name="Cameras" type="Node2D" parent="."]
 
-[node name="Camera1" type="Camera2D" parent="Cameras"]
+[node name="Camera1" parent="Cameras" instance=ExtResource( 8 )]
 position = Vector2( -104, -176 )
 current = true
-zoom = Vector2( 0.2, 0.2 )
-smoothing_enabled = true
 
-[node name="Camera2" type="Camera2D" parent="Cameras"]
-position = Vector2( 176, -208 )
-zoom = Vector2( 0.2, 0.2 )
-smoothing_enabled = true
+[node name="Camera2" parent="Cameras" instance=ExtResource( 8 )]
+position = Vector2( 168, -208 )
 
-[node name="Camera3" type="Camera2D" parent="Cameras"]
+[node name="Camera4" parent="Cameras" instance=ExtResource( 8 )]
 position = Vector2( 584, -208 )
-zoom = Vector2( 0.2, 0.2 )
-smoothing_enabled = true
 
 [node name="CameraPoint" type="Node2D" parent="."]
 position = Vector2( 0, -40 )
 
 [node name="CameraPoint1" parent="CameraPoint" instance=ExtResource( 1 )]
-position = Vector2( 96, -128 )
+position = Vector2( 88, -128 )
 current_camera = NodePath("../../Cameras/Camera1")
 switch_to_left = NodePath("../../Cameras/Camera1")
 switch_to_right = NodePath("../../Cameras/Camera2")
@@ -2006,7 +2001,7 @@ player = NodePath("../../Player")
 position = Vector2( 504, -56 )
 current_camera = NodePath("../../Cameras/Camera2")
 switch_to_left = NodePath("../../Cameras/Camera2")
-switch_to_right = NodePath("../../Cameras/Camera3")
+switch_to_right = NodePath("../../Cameras/Camera4")
 player = NodePath("../../Player")
 
 [node name="Enemys" type="Node2D" parent="."]
