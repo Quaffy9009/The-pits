@@ -1976,21 +1976,24 @@ last_position = Vector2( -928, 552 )
 
 [node name="Cameras" type="Node2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="Cameras"]
-position = Vector2( -16, -208 )
-current = true
-zoom = Vector2( 0.3, 0.3 )
-
 [node name="Camera2D2" type="Camera2D" parent="Cameras"]
 position = Vector2( 216, -208 )
 zoom = Vector2( 0.3, 0.3 )
+
+[node name="Camera2D3" type="Camera2D" parent="Cameras"]
+position = Vector2( -104, -184 )
+current = true
+zoom = Vector2( 0.3, 0.3 )
+limit_smoothed = true
+smoothing_enabled = true
 
 [node name="CameraPoint" type="Node2D" parent="."]
 position = Vector2( 0, -40 )
 
 [node name="Area2D" parent="CameraPoint" instance=ExtResource( 1 )]
 position = Vector2( 96, -128 )
-current_camera = NodePath("../../Cameras/Camera2D")
+current_camera = NodePath("../../Cameras/Camera2D3")
+switch_to_left = NodePath("../../Cameras/Camera2D3")
 switch_to_right = NodePath("../../Cameras/Camera2D2")
 player = NodePath("../../Player")
 
@@ -2012,11 +2015,14 @@ direction = 1
 [node name="Air" type="Node2D" parent="Enemys"]
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( -100, -180 )
+position = Vector2( -104, -184 )
 acceleration = 20
 deceleration = 10
 
 [node name="AnimationTree" parent="Player" index="2"]
 parameters/playback = SubResource( 50 )
+
+[node name="RemoteTransform2D" parent="Player" index="12"]
+remote_path = NodePath("../../Cameras/Camera2D3")
 
 [editable path="Player"]
