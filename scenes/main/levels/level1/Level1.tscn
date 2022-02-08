@@ -1984,11 +1984,11 @@ current = true
 [node name="Camera2" parent="Cameras" instance=ExtResource( 8 )]
 position = Vector2( 160, -184 )
 
-[node name="Camera4" parent="Cameras" instance=ExtResource( 8 )]
+[node name="Camera3" parent="Cameras" instance=ExtResource( 8 )]
 position = Vector2( 584, -184 )
 
 [node name="Camera4" type="Camera2D" parent="Cameras"]
-position = Vector2( 1107, -47 )
+position = Vector2( 1058, -54 )
 zoom = Vector2( 0.2, 0.2 )
 smoothing_enabled = true
 
@@ -2011,7 +2011,7 @@ player = NodePath("../../Player")
 position = Vector2( 504, -56 )
 current_camera = NodePath("../../Cameras/Camera2")
 switch_to_left = NodePath("../../Cameras/Camera2")
-switch_to_right = NodePath("../../Cameras/Camera4")
+switch_to_right = NodePath("../../Cameras/Camera3")
 player = NodePath("../../Player")
 
 [node name="CameraPoint3" parent="CameraPoint" instance=ExtResource( 1 )]
@@ -2021,6 +2021,7 @@ current_camera = NodePath("../../Cameras/Camera3")
 switch_to_left = NodePath("../../Cameras/Camera3")
 switch_to_right = NodePath("../../Cameras/Camera4")
 player = NodePath("../../Player")
+vertical = false
 
 [node name="CameraPoint4" parent="CameraPoint" instance=ExtResource( 1 )]
 position = Vector2( 980, 496 )
@@ -2029,6 +2030,7 @@ current_camera = NodePath("../../Cameras/Camera4")
 switch_to_left = NodePath("../../Cameras/Camera4")
 switch_to_right = NodePath("../../Cameras/Camera5")
 player = NodePath("../../Player")
+vertical = false
 
 [node name="Enemys" type="Node2D" parent="."]
 __meta__ = {
