@@ -442,10 +442,6 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2( 0.15, 0.15 )
-smoothing_speed = 8.0
-
 [node name="WallRaycastsLeft" type="Node2D" parent="."]
 
 [node name="RayCast1" type="RayCast2D" parent="WallRaycastsLeft"]
