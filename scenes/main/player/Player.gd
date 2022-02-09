@@ -299,7 +299,10 @@ func get_shoot_input():
 #shooting
 func shoot():
 	new_bullet = BULLET_SCENE.instance()
-	new_bullet.position = gun_muzzle.global_position
+	if Input.is_action_pressed("up"):
+		new_bullet.position = $Vertical_shoot.global_position
+	else:
+		new_bullet.position = gun_muzzle.global_position
 	get_tree().current_scene.add_child(new_bullet)
 
 

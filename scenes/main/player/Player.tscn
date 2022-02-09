@@ -406,6 +406,9 @@ jump_time_to_descent = 0.2
 lowfallMultiplier = 50
 Wall_jump_Velocity = Vector2( 150, -110 )
 
+[node name="Vertical_shoot" type="Position2D" parent="."]
+position = Vector2( -0.751099, -1.99561 )
+
 [node name="Muzzle" type="Position2D" parent="."]
 position = Vector2( 3, 3 )
 scale = Vector2( 4, 4 )
@@ -638,6 +641,7 @@ __meta__ = {
 }
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+position = Vector2( -1, 2 )
 update_rotation = false
 update_scale = false
 

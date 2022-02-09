@@ -18,9 +18,10 @@ func _ready():
 	elif Global.direction == -1:
 		shoot_direction = "left"
 		self.rotation_degrees = -180
+		scale.y = -1
 	elif Global.direction == 1:
 		shoot_direction = "right"
-		
+		scale.y = 1
 		
 func _physics_process(delta):
 	if shoot_direction == "left":
@@ -39,7 +40,7 @@ func _on_Bullet_body_entered(body):
 	SPEED = 0
 	$Sprite.hide()
 	$Timer.start()
-	
+	$LifeTimer.stop()
 	
 
 
@@ -47,5 +48,13 @@ func _on_Timer_timeout():
 	queue_free()
 
 
-func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
+
+
+
+func _on_LifeTimer_timeout():
+	
+	$ExplodeParticle.emitting = true
+	Global.play_wall_hit_sound = true
+	SPEED = 0
+	$Sprite.hide()
+	$Timer.start()
