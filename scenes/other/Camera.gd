@@ -1,6 +1,6 @@
 extends Camera2D
 
-
+signal screen_exited
 func _ready():
 	pass
 

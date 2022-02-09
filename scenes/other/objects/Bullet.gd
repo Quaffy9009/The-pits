@@ -1,62 +1,51 @@
 extends Area2D
 
 #SPEED VARIABLES
-const SPEED = 400
+var SPEED = 400
 
 
 #SHOOT DIRECTION VARIABLES
-var shootright = false
-var shootleft = false
-var shootdown = false
-var shootup = false
+var shoot_direction
 
 
 func _ready():
 	if Input.is_action_pressed("up"):
-		shootup = true
+		shoot_direction = "up"
+		self.rotation_degrees = -90
 	elif Input.is_action_pressed("down") and !Global.is_on_floor:
-		shootdown = true
+		shoot_direction = "down"
+		self.rotation_degrees = 90
 	elif Global.direction == -1:
-		shootleft = true
+		shoot_direction = "left"
+		self.rotation_degrees = -180
 	elif Global.direction == 1:
-		shootright = true
+		shoot_direction = "right"
+		
+		
 func _physics_process(delta):
-	if shootleft == true:
+	if shoot_direction == "left":
 		position.x += -SPEED * delta
-		$Sprite.show()
-		$Sprite1Coll.disabled = false
-		$Sprite.flip_h = true
-	elif shootright == true:
+	elif shoot_direction == "right":
 		position.x += SPEED * delta
-		$Sprite.show()
-		$Sprite1Coll.disabled = false
-	elif shootup == true:
+	elif shoot_direction == "up":
 		position.y += -SPEED * delta
-		$Sprite2.show()
-		$Sprite2Coll.disabled = false
-		$Sprite2.rotation_degrees = 270
-	elif shootdown == true:
+	elif shoot_direction == "down":
 		position.y += SPEED * delta
-		$Sprite2.show()
-		$Sprite2Coll.disabled = false
-	if shootup == true or shootdown == true:
-		$WallFinder/CollisionShape2D2.disabled = true
-		$WallFinder/CollisionShape2D.disabled = false
-	elif shootleft == true or  shootright == true:
-		$WallFinder/CollisionShape2D2.disabled = false
-		$WallFinder/CollisionShape2D.disabled = true
-func _on_Bullet_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	$DiePlayerTimer.play("timer")
+
+
 func _on_Bullet_body_entered(body):
-	$DiePlayerTimer.play("timer")
-func _on_DiePlayerTimer_animation_finished(anim_name):
-	queue_free()
-func _on_QueTimer_animation_finished(anim_name):
-	queue_free()
-func _on_EnemyFinder_body_entered(body):
-	$EnemyFinder/EnemyHitSound.play()
-	if $EnemyFinder/EnemyHitSound.playing == false:
-		queue_free()
-func _on_WallFinder_body_entered(body):
+	$Particles2D.emitting = true
 	Global.play_wall_hit_sound = true
+	SPEED = 0
+	$Sprite.hide()
+	$Timer.start()
+	
+	
+
+
+func _on_Timer_timeout():
+	queue_free()
+
+
+func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()

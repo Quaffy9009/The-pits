@@ -33,12 +33,14 @@ var move_able = true
 export var SHOOTFORCE = -260 # height when shooting down
 const HITBACK = -40
 
+var new_bullet
+
 var is_grounded
 var tick = false
 var current_speed = 0
 var is_moving = false
 var has_jumped = false
-var direction = 0
+var direction = 1
 
 export var acceleration = 10
 export var deceleration = 15
@@ -271,20 +273,18 @@ func get_shoot_input():
 		if !is_on_floor():
 			velocity.y = SHOOTFORCE
 			ammo_amount = ammo_amount - 1
-			print(ammo_amount)
 			$Sounds/ShootSound1.play()
 			shoot()
 	elif Input.is_action_just_pressed("shoot") and ammo_amount > 0:
 		shot = true
 		ammo_amount = ammo_amount - 1
-		print(ammo_amount)
 		$Sounds/ShootSound1.play()
 		shoot()
 	if is_on_floor() and ammo_amount == 0:
 		if reload_time > 0:
 			reload_time -=1
 		else:
-			reload_time = 15
+			reload_time = 20
 			ammo_amount = max_ammo_amount
 	if ammo_amount == 2:
 		$HUD/ShotUI/Sprite3.show()
@@ -298,7 +298,7 @@ func get_shoot_input():
 
 #shooting
 func shoot():
-	var new_bullet = BULLET_SCENE.instance()
+	new_bullet = BULLET_SCENE.instance()
 	new_bullet.position = gun_muzzle.global_position
 	get_tree().current_scene.add_child(new_bullet)
 
@@ -342,3 +342,5 @@ func _on_FlashOUT_animation_finished(anim_name):
 func _on_SpikeTDT_body_entered(body):
 	Global.respawn = true
 	Global.md = true
+
+

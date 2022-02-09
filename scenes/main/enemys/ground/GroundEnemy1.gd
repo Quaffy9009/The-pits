@@ -24,6 +24,7 @@ func _physics_process(delta):
 func _on_PlayerDetector_body_entered(body):
 	Global.ge1_damage = true
 func _on_BulletDetector_area_entered(area):
+	
 	Global.play_enemy_hit_sound = true
 	if health > 0:
 		health = health - 1
