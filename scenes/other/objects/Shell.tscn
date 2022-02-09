@@ -69,14 +69,14 @@ extents = Vector2( 9.44444, 9.44444 )
 
 [node name="Shell" type="KinematicBody2D"]
 scale = Vector2( 0.2, 0.2 )
-collision_layer = 4096
+collision_layer = 0
 collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 4 )
 animation = "twist"
-frame = 12
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

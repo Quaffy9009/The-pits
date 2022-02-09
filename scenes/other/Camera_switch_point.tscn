@@ -9,6 +9,7 @@ extents = Vector2( 0, 89.25 )
 extents = Vector2( 8, 93 )
 
 [node name="CameraPoint" type="Area2D"]
+collision_layer = 0
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

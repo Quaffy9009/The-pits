@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/main/enemys/ground/GroundEnemy1.gd" type="Script" id=1]
 [ext_resource path="res://assets/main/enemys/ground/slime_0_walkAnimationSheet.png" type="Texture" id=2]
-[ext_resource path="res://assets/main/sounds/pits_enemyhit.wav" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
@@ -32,56 +31,41 @@ animations = [ {
 extents = Vector2( 17.5, 22 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 23.5, 22 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 20.5, 22 )
+extents = Vector2( 19.5, 23.5 )
 
 [node name="GroundEnemy1" type="KinematicBody2D"]
 scale = Vector2( 0.2, 0.2 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="ShellDrop" type="Position2D" parent="."]
 position = Vector2( -9, -9 )
 scale = Vector2( 2, 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 5, 0 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 1 )
 animation = "walking"
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
-position = Vector2( -4.5, 2 )
 shape = SubResource( 4 )
 
 [node name="FloorChecker" type="RayCast2D" parent="."]
+position = Vector2( -20, 20 )
 enabled = true
-cast_to = Vector2( 0, 25 )
+cast_to = Vector2( 0, 5 )
 collision_mask = 2
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 2048
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( -0.5, 0 )
 shape = SubResource( 3 )
 
-[node name="BulletDetector" type="Area2D" parent="."]
-collision_layer = 2048
-collision_mask = 1024
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDetector"]
-position = Vector2( -2.5, 0 )
-shape = SubResource( 2 )
-
-[node name="EnemyHitSound" type="AudioStreamPlayer" parent="BulletDetector"]
-stream = ExtResource( 3 )
-volume_db = -30.0
-
+[connection signal="area_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_area_entered"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
-[connection signal="area_entered" from="BulletDetector" to="." method="_on_BulletDetector_area_entered"]

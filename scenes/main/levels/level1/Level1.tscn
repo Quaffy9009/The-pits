@@ -2035,14 +2035,13 @@ vertical = false
 
 [node name="Enemys" type="Node2D" parent="."]
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Ground" type="Node2D" parent="Enemys"]
 
 [node name="GroundEnemy1" parent="Enemys/Ground" instance=ExtResource( 2 )]
-position = Vector2( 24, -168 )
+position = Vector2( 183, -181 )
 
 [node name="GroundEnemy2" parent="Enemys/Ground" instance=ExtResource( 2 )]
 position = Vector2( 416, -192 )
