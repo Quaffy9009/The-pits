@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/main/enemys/ground/GroundEnemy1.gd" type="Script" id=1]
 [ext_resource path="res://assets/main/enemys/ground/slime_0_walkAnimationSheet.png" type="Texture" id=2]
@@ -32,6 +32,9 @@ extents = Vector2( 17.5, 22 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 19.5, 23.5 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 80.9376, 25 )
 
 [node name="GroundEnemy1" type="KinematicBody2D"]
 scale = Vector2( 0.2, 0.2 )
@@ -67,5 +70,27 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 shape = SubResource( 3 )
 
+[node name="PlayerDetectorLeft" type="Area2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectorLeft"]
+position = Vector2( -81.875, -1.78814e-06 )
+scale = Vector2( 0.999999, 0.999999 )
+shape = SubResource( 9 )
+
+[node name="PlayerDetectorRight" type="Area2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectorRight"]
+position = Vector2( 94.0625, 0 )
+scale = Vector2( 0.999999, 0.999999 )
+shape = SubResource( 9 )
+
 [connection signal="area_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_area_entered"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_entered" from="PlayerDetectorLeft" to="." method="_on_PlayerDetectorLeft_body_entered"]
+[connection signal="body_entered" from="PlayerDetectorRight" to="." method="_on_PlayerDetectorRight_body_entered"]
