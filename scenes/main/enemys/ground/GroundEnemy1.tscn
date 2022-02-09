@@ -39,6 +39,7 @@ extents = Vector2( 80.9376, 25 )
 [node name="GroundEnemy1" type="KinematicBody2D"]
 scale = Vector2( 0.2, 0.2 )
 script = ExtResource( 1 )
+angry_speed = 15
 
 [node name="ShellDrop" type="Position2D" parent="."]
 position = Vector2( -9, -9 )
@@ -92,5 +93,5 @@ shape = SubResource( 9 )
 
 [connection signal="area_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_area_entered"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
-[connection signal="body_entered" from="PlayerDetectorLeft" to="." method="_on_PlayerDetectorLeft_body_entered"]
-[connection signal="body_entered" from="PlayerDetectorRight" to="." method="_on_PlayerDetectorRight_body_entered"]
+[connection signal="body_exited" from="PlayerDetectorLeft" to="." method="_on_PlayerDetectorLeft_body_exited"]
+[connection signal="body_exited" from="PlayerDetectorRight" to="." method="_on_PlayerDetectorRight_body_exited"]

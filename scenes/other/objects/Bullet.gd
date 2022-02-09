@@ -1,7 +1,7 @@
 extends Area2D
 
 #SPEED VARIABLES
-var SPEED = 400
+var SPEED = 370
 
 
 #SHOOT DIRECTION VARIABLES
@@ -11,6 +11,10 @@ var shoot_direction
 func _ready():
 	if Input.is_action_pressed("up"):
 		shoot_direction = "up"
+		if Global.direction == 1:
+			$ExplodeParticle.rotation_degrees = 90
+		else:
+			$ExplodeParticle.rotation_degrees = 90
 		self.rotation_degrees = -90
 	elif Input.is_action_pressed("down") and !Global.is_on_floor:
 		shoot_direction = "down"
@@ -22,7 +26,7 @@ func _ready():
 	elif Global.direction == 1:
 		shoot_direction = "right"
 		scale.y = 1
-		
+
 func _physics_process(delta):
 	if shoot_direction == "left":
 		position.x += -SPEED * delta

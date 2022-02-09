@@ -59,3 +59,13 @@ func _on_PlayerDetectorRight_body_entered(body):
 		speed = angry_speed
 		$AnimatedSprite.flip_h = true
 		$FloorChecker.position.x = 20 * direction
+
+
+func _on_PlayerDetectorLeft_body_exited(body):
+	if body.is_in_group("player"):
+		speed = 15
+
+
+func _on_PlayerDetectorRight_body_exited(body):
+	if body.is_in_group("player"):
+		speed = 15

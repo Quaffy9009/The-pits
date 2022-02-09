@@ -1993,7 +1993,7 @@ current = true
 position = Vector2( 160, -208 )
 
 [node name="Camera3" parent="Cameras" instance=ExtResource( 8 )]
-position = Vector2( 592, -200 )
+position = Vector2( 551, -203 )
 
 [node name="Camera4" type="Camera2D" parent="Cameras"]
 position = Vector2( 1058, -54 )
@@ -2016,7 +2016,7 @@ switch_to_right = NodePath("../../Cameras/Camera2")
 player = NodePath("../../Player")
 
 [node name="CameraPoint2" parent="CameraPoint" instance=ExtResource( 1 )]
-position = Vector2( 504, -56 )
+position = Vector2( 472, -55 )
 current_camera = NodePath("../../Cameras/Camera2")
 switch_to_left = NodePath("../../Cameras/Camera2")
 switch_to_right = NodePath("../../Cameras/Camera3")

@@ -400,17 +400,17 @@ script = ExtResource( 13 )
 SHOOTFORCE = -150
 deceleration = 20
 jump_slowing_down = 25
-jump_height = 20.0
+jump_height = 25.0
 jump_time_to_peak = 0.3
 jump_time_to_descent = 0.2
 lowfallMultiplier = 50
-Wall_jump_Velocity = Vector2( 150, -110 )
+Wall_jump_Velocity = Vector2( 160, -115 )
 
 [node name="Vertical_shoot" type="Position2D" parent="."]
 position = Vector2( -0.751099, -1.99561 )
 
 [node name="Muzzle" type="Position2D" parent="."]
-position = Vector2( 3, 3 )
+position = Vector2( 0, 3 )
 scale = Vector2( 4, 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
