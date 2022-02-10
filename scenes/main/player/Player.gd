@@ -3,7 +3,7 @@ extends KinematicBody2D
 signal grounded_updated(is_grounded)
 
 #HEALTH VARIABLES
-var health = 7
+var health = 6
 var max_health = 6
 var health_minus = 1
 
@@ -15,7 +15,7 @@ var cur_game_sa = 0
 var shootinga 
 var shot = false
 var shooting = false
-var reload_time = 15
+var reload_time = 40
 var shoot_able = true
 var ammo_amount = 2
 var max_ammo_amount = 2
@@ -280,12 +280,13 @@ func get_shoot_input():
 		ammo_amount = ammo_amount - 1
 		$Sounds/ShootSound1.play()
 		shoot()
-	if is_on_floor() and ammo_amount == 0:
+	if is_on_floor() and ammo_amount < max_ammo_amount:
 		if reload_time > 0:
 			reload_time -=1
 		else:
-			reload_time = 20
-			ammo_amount = max_ammo_amount
+			reload_time = 40
+			if ammo_amount < max_ammo_amount:
+				ammo_amount += 1
 	if ammo_amount == 2:
 		$HUD/ShotUI/Sprite3.show()
 	elif ammo_amount == 1:
@@ -308,14 +309,7 @@ func shoot():
 
 #health
 func get_health():
-	if Global.ge1_damage == true:
-		health -= health_minus
-		Global.ge1_damage = false
-		#$Sounds/HurtSound1.play()
-		#state_machine.travel("Damaged")
-	if Global.ge2_damage == true:
-		health -= 4
-		Global.ge2_damage = false
+	health = Global.health
 	
 func shell_amount_func():
 	if Global.add_cur_game_sa == true:

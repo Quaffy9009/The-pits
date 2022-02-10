@@ -9,7 +9,7 @@ var velocity = Vector2(0,0)
 func _ready():
 	randomize()
 	var SVD = (randi() % 10)
-	print("SVD =", SVD)
+	#print("SVD =", SVD)
 	if SVD == 10:
 		FLYRANGE = -50
 		JUMPFORCE = -50

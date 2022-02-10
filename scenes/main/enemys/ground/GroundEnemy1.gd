@@ -24,7 +24,8 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity,Vector2.UP)
 
 func _on_PlayerDetector_body_entered(body):
-	Global.ge1_damage = true
+	if body.is_in_group("player"):
+		Global.damage(1)
 
 
 func _on_PlayerDetector_area_entered(area):
