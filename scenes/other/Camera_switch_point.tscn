@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/other/Camera_switch_point.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 0, 89.25 )
+extents = Vector2( 8, 89.25 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 93 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4, 93 )
 
 [node name="CameraPoint" type="Area2D"]
 collision_layer = 0
@@ -17,12 +20,25 @@ position = Vector2( 0, -89.25 )
 shape = SubResource( 1 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 7
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 0, -83 )
 shape = SubResource( 2 )
+disabled = true
+
+[node name="StaticBodyLeft" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodyLeft"]
+position = Vector2( -12, -80 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="StaticBodyRight" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodyRight"]
+position = Vector2( 12, -81 )
+shape = SubResource( 3 )
 disabled = true
 
 [node name="camera_limit_right" type="Node2D" parent="."]

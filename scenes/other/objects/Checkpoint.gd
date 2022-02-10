@@ -6,4 +6,4 @@ export(Vector2) var last_position
 
 func _on_Checkpoint_body_entered(body):
 	Global.last_position = last_position
-	print(Global.last_position)
+	

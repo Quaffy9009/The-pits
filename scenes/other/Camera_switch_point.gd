@@ -21,6 +21,7 @@ func _on_Area2D_body_entered(body):
 				#get_node(current_camera).current = false
 				current_camera = switch_to_left
 				get_node(player).get_node("RemoteTransform2D").set_remote_node(switch_to_left)
+				$StaticBodyRight/CollisionShape2D.set_deferred("disabled", false)
 		
 		elif switch_to_right and current_camera == switch_to_left:
 			if body.is_in_group("player"):
@@ -28,11 +29,14 @@ func _on_Area2D_body_entered(body):
 				get_node(switch_to_right).current = true
 				current_camera = switch_to_right
 				get_node(player).get_node("RemoteTransform2D").set_remote_node(switch_to_right)
+				$StaticBodyLeft/CollisionShape2D.set_deferred("disabled", false)
 	
 
 
 func _on_Area2D_body_exited(body):
-	pass
+	if !one_time_pass and body.is_in_group("player"):
+		$StaticBodyRight/CollisionShape2D.set_deferred("disabled", true)
+		$StaticBodyLeft/CollisionShape2D.set_deferred("disabled", true)
 
 func _process(delta):
 	if vertical:

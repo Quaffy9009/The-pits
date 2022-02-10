@@ -49,7 +49,7 @@ visible = false
 scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
 animation = "Main"
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

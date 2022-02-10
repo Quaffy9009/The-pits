@@ -28,7 +28,7 @@ var cur_direction  #1 = right/ 2 = left/ 3 = up/ 4 = down/
 var current
 
 #MOVEMENT VARIABLES
-var move_able = true
+var move_able = false
 
 export var SHOOTFORCE = -260 # height when shooting down
 const HITBACK = -40
@@ -308,11 +308,6 @@ func shoot():
 
 #health
 func get_health():
-	if Global.md == true:
-		if health >= 1:
-			health -= health_minus
-			#$Sounds/HurtSound1.play()
-			Global.md = false
 	if Global.ge1_damage == true:
 		health -= health_minus
 		Global.ge1_damage = false
@@ -338,8 +333,7 @@ func get_sound():
 	if Global.play_wall_hit_sound == true:
 		$Sounds/WallHitSound.play()
 		Global.play_wall_hit_sound = false
-func _on_MoveTimer_animation_finished(anim_name):
-	move_able = true
+
 func _on_FlashOUT_animation_finished(anim_name):
 	move_able = false
 func _on_SpikeTDT_body_entered(body):
@@ -347,3 +341,7 @@ func _on_SpikeTDT_body_entered(body):
 	Global.md = true
 
 
+
+
+func _on_Timer_timeout():
+	move_able = true
