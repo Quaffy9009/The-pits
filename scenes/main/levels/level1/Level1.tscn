@@ -1872,7 +1872,7 @@ margin_top = -2630.0
 margin_right = 2290.0
 margin_bottom = 1481.0
 rect_scale = Vector2( 2, 2 )
-color = Color( 0.290196, 0.290196, 0.290196, 1 )
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2087,6 +2087,7 @@ position = Vector2( -1, -24 )
 remote_path = NodePath("../../Cameras/Camera1")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0.7216, 0.8036, 0.82, 1 )
 
 [connection signal="grounded_updated" from="Player" to="Cameras/Camera1" method="_on_Player_grounded_updated"]
