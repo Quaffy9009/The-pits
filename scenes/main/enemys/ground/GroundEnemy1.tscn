@@ -50,7 +50,7 @@ position = Vector2( 5, 0 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 1 )
 animation = "walking"
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
