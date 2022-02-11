@@ -2087,7 +2087,7 @@ position = Vector2( -1, -24 )
 remote_path = NodePath("../../Cameras/Camera1")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.4187, 0.439105, 0.53, 1 )
+color = Color( 0.7216, 0.8036, 0.82, 1 )
 
 [connection signal="grounded_updated" from="Player" to="Cameras/Camera1" method="_on_Player_grounded_updated"]
 
