@@ -35,7 +35,7 @@ const HITBACK = -40
 
 var new_bullet
 
-var is_grounded
+
 var tick = false
 var current_speed = 0
 var is_moving = false
@@ -83,7 +83,7 @@ func _ready():
 func _process(delta):
 	if (has_jumped or has_wall_jumped) and is_on_floor():
 		if has_jumped:
-			max_speed += jump_slowing_down
+			max_speed = 75
 		has_jumped = false
 		has_wall_jumped = false
 		jumped_straight = false
@@ -106,7 +106,7 @@ func _physics_process(delta):
 	get_health()
 	shell_amount_func()
 	_update_wall_directions()
-	#print(velocity.y)
+	print(max_speed)
 	
 	#lowers max speed if in air
 	if !is_on_floor():
@@ -118,10 +118,7 @@ func _physics_process(delta):
 			has_pressed_jump = false
 		has_jumped = true
 	
-	var was_grounded = is_grounded
-	is_grounded = is_on_floor()
-	if was_grounded == null or was_grounded != is_grounded:
-		emit_signal("grounded_updated", is_on_floor())
+	
 	
 	
 	
@@ -332,7 +329,6 @@ func _on_FlashOUT_animation_finished(anim_name):
 	move_able = false
 func _on_SpikeTDT_body_entered(body):
 	Global.respawn = true
-	Global.md = true
 
 
 

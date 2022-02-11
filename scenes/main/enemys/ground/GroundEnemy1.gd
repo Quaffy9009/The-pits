@@ -29,11 +29,12 @@ func _on_PlayerDetector_body_entered(body):
 
 
 func _on_PlayerDetector_area_entered(area):
-	Global.play_enemy_hit_sound = true
-	if health > 0:
-		health = health - 1
-	else:
-		die()
+	if area.is_in_group("bullet"):
+		Global.play_enemy_hit_sound = true
+		if health > 0:
+			health = health - 1
+		else:
+			die()
 
 
 func die():
