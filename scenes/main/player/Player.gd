@@ -87,6 +87,7 @@ func _process(delta):
 		has_jumped = false
 		has_wall_jumped = false
 		jumped_straight = false
+		
 		tick = false
 	
 	#saves player direction globaly
@@ -94,6 +95,15 @@ func _process(delta):
 	#saves if player is touching floor globaly
 	Global.is_on_floor = is_on_floor()
 	
+	#lowers max speed if in air
+	if !is_on_floor():
+		#gravity
+		velocity.y += get_gravity() * delta 
+		if (has_jumped or has_wall_jumped) and !tick:
+			max_speed -= jump_slowing_down
+			tick = true
+			has_pressed_jump = false
+		has_jumped = true
 	
 
 
@@ -106,17 +116,9 @@ func _physics_process(delta):
 	get_health()
 	shell_amount_func()
 	_update_wall_directions()
-	print(max_speed)
+	#print(velocity.y)
 	
-	#lowers max speed if in air
-	if !is_on_floor():
-		#gravity
-		velocity.y += get_gravity() * delta 
-		if has_jumped and !tick:
-			max_speed -= jump_slowing_down
-			tick = true
-			has_pressed_jump = false
-		has_jumped = true
+	
 	
 	
 	
@@ -187,7 +189,7 @@ func get_input():
 		velocity.y = maxfallspeed
 	
 	#removes y velocity when on ground
-	if is_on_floor() and !has_pressed_jump:
+	if is_on_floor() and !has_jumped:
 		velocity.y = 1
 	
 	
@@ -198,6 +200,7 @@ func get_input():
 	
 	#wall jumping and sliding
 	if !is_on_floor() and wall_direction != 0:
+		$Sprite.flip_h = false if wall_direction == -1 else true
 		wall_jumping()
 		if Input.is_action_pressed("left") and wall_direction == -1 and velocity.y > 0:
 			velocity.y = max_wall_slide_speed
