@@ -28,10 +28,10 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 17.5, 22 )
+extents = Vector2( 21.25, 22.8684 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 18.7639, 21.75 )
+extents = Vector2( 25.8828, 24.9545 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 80.9376, 25 )
@@ -46,14 +46,15 @@ position = Vector2( -9, -9 )
 scale = Vector2( 2, 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 5, 0 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 1 )
 animation = "walking"
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+position = Vector2( -3.75, 0.868396 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 4 )
 
 [node name="FloorChecker" type="RayCast2D" parent="."]
@@ -66,8 +67,8 @@ collision_mask = 2
 collision_layer = 2049
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( 0.736094, -1.75 )
-scale = Vector2( 1, 1 )
+position = Vector2( -4.12965, 1.20259 )
+scale = Vector2( 0.999999, 0.999999 )
 shape = SubResource( 3 )
 
 [node name="PlayerDetectorLeft" type="Area2D" parent="."]

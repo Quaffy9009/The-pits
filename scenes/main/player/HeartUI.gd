@@ -37,5 +37,6 @@ func _process(delta):
 		$Hearts1.hide()
 		$HHearts.hide()
 		$Hearts0.show()
-		Global.shell_amount = Global.shell_amount - get_parent().get_parent().get_node(".").cur_game_sa
+		Global.shell_amount = 0
 		get_tree().change_scene("res://scenes/main/levels/level1/Level1.tscn")
+		Global.health = 6

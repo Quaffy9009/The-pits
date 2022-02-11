@@ -11,7 +11,7 @@ var respawn = false
 var direction
 var is_on_floor
 #PLAYER DAMAGE VARIABLES
-var health = 6
+var health = 7
 
 #SHELL AMOUNT VARIUABLES
 var add_cur_game_sa = false
@@ -31,3 +31,5 @@ func damage(ammount):
 
 func _on_Invincibility_timer_timeout():
 	is_stoped = true
+
+
