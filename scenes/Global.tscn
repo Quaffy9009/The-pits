@@ -6,3 +6,8 @@
 script = ExtResource( 1 )
 
 [node name="BackgroundMusic" type="Node2D" parent="."]
+
+[node name="Invincibility timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Invincibility timer" to="." method="_on_Invincibility_timer_timeout"]

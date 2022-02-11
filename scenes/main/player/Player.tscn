@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://assets/other/heartsui/Heart2.png" type="Texture" id=1]
 [ext_resource path="res://assets/main/bullet2.png" type="Texture" id=2]
@@ -21,102 +21,6 @@
 [ext_resource path="res://assets/main/sounds/pits_enemyhit.wav" type="AudioStream" id=19]
 [ext_resource path="res://assets/main/sounds/pits_wallhit.wav" type="AudioStream" id=20]
 [ext_resource path="res://scenes/main/player/HeartUI.gd" type="Script" id=21]
-
-[sub_resource type="AnimationNodeAnimation" id=19]
-animation = "Damaged"
-
-[sub_resource type="AnimationNodeAnimation" id=20]
-animation = "FallLookingUp"
-
-[sub_resource type="AnimationNodeAnimation" id=21]
-animation = "FallingNormal"
-
-[sub_resource type="AnimationNodeAnimation" id=22]
-animation = "Idle"
-
-[sub_resource type="AnimationNodeAnimation" id=23]
-animation = "LookingDown(OnlyInAir)"
-
-[sub_resource type="AnimationNodeAnimation" id=56]
-animation = "OnGroundLookUp"
-
-[sub_resource type="AnimationNodeAnimation" id=24]
-animation = "Run"
-
-[sub_resource type="AnimationNodeAnimation" id=25]
-animation = "RunPointingUp"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=37]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=38]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=39]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=40]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=44]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=57]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=58]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=59]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=60]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=61]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=62]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=63]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=64]
-
-[sub_resource type="AnimationNodeStateMachine" id=41]
-states/Damaged/node = SubResource( 19 )
-states/Damaged/position = Vector2( 266, 140 )
-states/FallLookingUp/node = SubResource( 20 )
-states/FallLookingUp/position = Vector2( 538, 128 )
-states/FallingNormal/node = SubResource( 21 )
-states/FallingNormal/position = Vector2( 538, 212 )
-states/Idle/node = SubResource( 22 )
-states/Idle/position = Vector2( 335, 315 )
-states/LookingDown(OnlyInAir)/node = SubResource( 23 )
-states/LookingDown(OnlyInAir)/position = Vector2( 538, 54 )
-states/OnGroundLookUp/node = SubResource( 56 )
-states/OnGroundLookUp/position = Vector2( 139, 448 )
-states/Run/node = SubResource( 24 )
-states/Run/position = Vector2( 6, 315 )
-states/RunPointingUp/node = SubResource( 25 )
-states/RunPointingUp/position = Vector2( 12, 155 )
-transitions = [ "Idle", "Run", SubResource( 26 ), "Run", "Idle", SubResource( 27 ), "Idle", "RunPointingUp", SubResource( 28 ), "RunPointingUp", "Idle", SubResource( 29 ), "Idle", "Damaged", SubResource( 30 ), "LookingDown(OnlyInAir)", "Idle", SubResource( 32 ), "Idle", "LookingDown(OnlyInAir)", SubResource( 33 ), "Run", "RunPointingUp", SubResource( 34 ), "Idle", "FallLookingUp", SubResource( 35 ), "FallLookingUp", "Idle", SubResource( 36 ), "Idle", "FallingNormal", SubResource( 37 ), "FallingNormal", "Idle", SubResource( 38 ), "FallingNormal", "FallLookingUp", SubResource( 39 ), "FallingNormal", "LookingDown(OnlyInAir)", SubResource( 40 ), "RunPointingUp", "Run", SubResource( 43 ), "Damaged", "Idle", SubResource( 44 ), "OnGroundLookUp", "Idle", SubResource( 57 ), "Idle", "OnGroundLookUp", SubResource( 58 ), "OnGroundLookUp", "FallLookingUp", SubResource( 59 ), "FallLookingUp", "OnGroundLookUp", SubResource( 60 ), "OnGroundLookUp", "Run", SubResource( 61 ), "Run", "OnGroundLookUp", SubResource( 62 ), "RunPointingUp", "OnGroundLookUp", SubResource( 63 ), "OnGroundLookUp", "RunPointingUp", SubResource( 64 ) ]
-start_node = "Idle"
-graph_offset = Vector2( -116, 11 )
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=42]
 
 [sub_resource type="Animation" id=13]
 resource_name = "Damaged"
@@ -417,11 +321,6 @@ hframes = 6
 vframes = 6
 frame = 6
 region_rect = Rect2( 24, 14, 12, 14 )
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 41 )
-anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 42 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false

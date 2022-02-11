@@ -19,6 +19,7 @@ func _physics_process(delta):
 		direction = -direction 
 		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
 		$FloorChecker.position.x = 20 * direction
+		
 	velocity.y =1
 	velocity.x = speed * direction
 	velocity = move_and_slide(velocity,Vector2.UP)

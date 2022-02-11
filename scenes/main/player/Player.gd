@@ -23,9 +23,7 @@ onready var gun_muzzle = $Muzzle
 onready var BULLET_SCENE = preload("res://scenes/other/objects/Bullet.tscn")
 
 #CURRENT STATE VARIABLES
-var state_machine
-var cur_direction  #1 = right/ 2 = left/ 3 = up/ 4 = down/
-var current
+
 
 #MOVEMENT VARIABLES
 var move_able = false
@@ -74,11 +72,6 @@ var has_wall_jumped =false
 
 
 
-func _ready():
-	state_machine = $AnimationTree.get("parameters/playback")
-	
-	#for some reason has_jumped fires off without a reason
-	#max_speed -= jump_slowing_down
 
 func _process(delta):
 	if (has_jumped or has_wall_jumped) and is_on_floor():
@@ -144,7 +137,7 @@ func get_gravity() -> float:  #sets gravity type
 func get_input():
 	
 	#print(max_speed)
-	current = state_machine.get_current_node()
+	
 	move_and_slide(velocity,Vector2.UP)
 	#if youre not moving 
 	if velocity.x == 0:

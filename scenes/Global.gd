@@ -5,11 +5,9 @@ extends Node2D
 var last_position = Vector2(0,0)
 
 #MAIN VARIABLES
-var cur_gravity = 50
+var is_stoped = true
 var cur_room = 1
-var testing_camera = false
 var respawn = false
-var md = false
 var direction
 var is_on_floor
 #PLAYER DAMAGE VARIABLES
@@ -25,4 +23,11 @@ var play_enemy_hit_sound = false
 var play_shell_sound = false
 
 func damage(ammount):
-	health -= ammount
+	if is_stoped:
+		health -= ammount
+		get_node("Invincibility timer").start()
+		is_stoped = false
+
+
+func _on_Invincibility_timer_timeout():
+	is_stoped = true

@@ -31,7 +31,7 @@ animations = [ {
 extents = Vector2( 17.5, 22 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 19.5, 21.75 )
+extents = Vector2( 18.7639, 21.75 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 80.9376, 25 )
@@ -50,6 +50,7 @@ position = Vector2( 5, 0 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 1 )
 animation = "walking"
+frame = 3
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
@@ -58,14 +59,15 @@ shape = SubResource( 4 )
 [node name="FloorChecker" type="RayCast2D" parent="."]
 position = Vector2( -20, 20 )
 enabled = true
-cast_to = Vector2( 0, 5 )
+cast_to = Vector2( 0, 10 )
 collision_mask = 2
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 2049
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( 0, -1.75 )
+position = Vector2( 0.736094, -1.75 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 3 )
 
 [node name="PlayerDetectorLeft" type="Area2D" parent="."]
