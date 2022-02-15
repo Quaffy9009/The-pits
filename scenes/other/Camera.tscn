@@ -4,7 +4,6 @@
 
 [node name="Camera2" type="Camera2D"]
 zoom = Vector2( 0.2, 0.2 )
-drag_margin_v_enabled = true
 smoothing_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource( 1 )

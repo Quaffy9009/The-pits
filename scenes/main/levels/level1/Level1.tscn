@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://scenes/other/Camera_switch_point.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/main/enemys/ground/GroundEnemy1.tscn" type="PackedScene" id=2]
@@ -1880,8 +1880,6 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 112/shapes = [  ]
 112/z_index = 0
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=106]
-
 [node name="Level1" type="Node2D"]
 script = ExtResource( 6 )
 __meta__ = {
@@ -2107,10 +2105,7 @@ deceleration = 10
 max_speed = 75
 jump_slowing_down = 10
 
-[node name="AnimationTree" parent="Player" index="3"]
-parameters/playback = SubResource( 106 )
-
-[node name="RemoteTransform2D" parent="Player" index="12"]
+[node name="RemoteTransform2D" parent="Player" index="11"]
 position = Vector2( -1, -24 )
 remote_path = NodePath("../../Cameras/Camera1")
 
