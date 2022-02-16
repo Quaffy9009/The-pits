@@ -538,9 +538,13 @@ __meta__ = {
 }
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
-position = Vector2( -1, 2 )
+position = Vector2( 0, 16 )
 update_rotation = false
 update_scale = false
+
+[node name="Coyote timer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
 
 [connection signal="animation_finished" from="FlashScreen/FlashOUT" to="." method="_on_FlashOUT_animation_finished"]
 [connection signal="timeout" from="FlashScreen/Timer" to="." method="_on_Timer_timeout"]

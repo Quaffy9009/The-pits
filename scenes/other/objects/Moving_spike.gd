@@ -21,3 +21,4 @@ func _init_tween():
 
 func _on_Area2D_body_entered(body):
 	Global.damage(1)
+

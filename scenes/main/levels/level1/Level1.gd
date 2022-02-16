@@ -10,5 +10,5 @@ func respawn():
 	$Player.set_position(Global.last_position)
 	$Player/FlashScreen/ColorRect.show()
 	$Player/FlashScreen/FlashIN.play("flashin")
-	$Player/FlashScreen/MoveTimer.play("timer")
+	#$Player/FlashScreen/MoveTimer.play("timer")
 	Global.respawn = false

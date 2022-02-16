@@ -2045,33 +2045,37 @@ position = Vector2( 0, -40 )
 [node name="CameraPoint1" parent="CameraPoint" instance=ExtResource( 1 )]
 position = Vector2( 88, -128 )
 current_camera = NodePath("../../Cameras/Camera1")
-switch_to_left = NodePath("../../Cameras/Camera1")
-switch_to_right = NodePath("../../Cameras/Camera2")
 player = NodePath("../../Player")
+next_point = NodePath("../CameraPoint2")
+camera_left_exist = true
+camera_right_exist = true
+current_camera_left = true
 
 [node name="CameraPoint2" parent="CameraPoint" instance=ExtResource( 1 )]
 position = Vector2( 472, -55 )
 current_camera = NodePath("../../Cameras/Camera2")
-switch_to_left = NodePath("../../Cameras/Camera2")
-switch_to_right = NodePath("../../Cameras/Camera3")
 player = NodePath("../../Player")
+next_point = NodePath("../CameraPoint3")
+prev_point = NodePath("../CameraPoint1")
+camera_left_exist = true
+camera_right_exist = true
+current_camera_left = true
 
 [node name="CameraPoint3" parent="CameraPoint" instance=ExtResource( 1 )]
 position = Vector2( 1002, -73 )
 rotation = 1.5708
 enabled = false
 current_camera = NodePath("../../Cameras/Camera3")
-switch_to_left = NodePath("../../Cameras/Camera3")
-switch_to_right = NodePath("../../Cameras/Camera4")
 player = NodePath("../../Player")
 vertical = false
+camera_left_exist = true
+camera_right_exist = true
+current_camera_left = true
 
 [node name="CameraPoint4" parent="CameraPoint" instance=ExtResource( 1 )]
 position = Vector2( 980, 496 )
 rotation = 1.5708
 current_camera = NodePath("../../Cameras/Camera4")
-switch_to_left = NodePath("../../Cameras/Camera4")
-switch_to_right = NodePath("../../Cameras/Camera5")
 player = NodePath("../../Player")
 vertical = false
 

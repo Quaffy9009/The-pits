@@ -39,6 +39,7 @@ var current_speed = 0
 var is_moving = false
 var has_jumped = false
 var direction = 1
+var is_grounded
 
 export var acceleration = 10
 export var deceleration = 15
@@ -109,19 +110,22 @@ func _physics_process(delta):
 	get_health()
 	shell_amount_func()
 	_update_wall_directions()
-	#print(velocity.y)
+	#print($"Coyote timer".is_stopped())
 	
 	
-	
-	
+	var was_grounded = is_grounded
+	is_grounded = is_on_floor()
+	if was_grounded == null or was_grounded != is_grounded:
+		emit_signal("grounded_updated", is_on_floor())
 	
 	
 	
 	
 	if Input.is_action_just_pressed("jump") and move_able:
 		has_pressed_jump = true
-		if is_on_floor():
+		if is_on_floor() or !$"Coyote timer".is_stopped():
 			jump()
+			$"Coyote timer".stop()
 			if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
 				jumped_straight = true
 	
@@ -138,7 +142,7 @@ func get_input():
 	
 	#print(max_speed)
 	
-	move_and_slide(velocity,Vector2.UP)
+	
 	#if youre not moving 
 	if velocity.x == 0:
 		if Input.is_action_pressed("up"):
@@ -176,6 +180,11 @@ func get_input():
 			is_moving = false
 			deceleration()
 		
+	
+	var was_on_floor = is_on_floor()
+	move_and_slide(velocity,Vector2.UP)
+	if !is_on_floor() and was_on_floor and !has_jumped and velocity.y > 0:
+		$"Coyote timer".start()
 	
 	#max falling speed
 	if velocity.y > maxfallspeed:
