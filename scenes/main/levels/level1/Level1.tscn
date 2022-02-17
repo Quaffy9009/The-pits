@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/other/objects/Checkpoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/main/levels/level1/Level1.gd" type="Script" id=6]
 [ext_resource path="res://assets/TileSets/Rocks.png" type="Texture" id=7]
-[ext_resource path="res://scenes/other/Camera.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/other/Camera.gd" type="Script" id=8]
 [ext_resource path="res://scenes/other/objects/Moving_spike.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/TileSets/Prototype8x8.png" type="Texture" id=13]
 [ext_resource path="res://assets/TileSets/UndertheSeaTileset.png" type="Texture" id=14]
@@ -2019,32 +2019,12 @@ last_position = Vector2( -928, 552 )
 
 [node name="Cameras" type="Node2D" parent="."]
 
-[node name="Camera1" parent="Cameras" instance=ExtResource( 8 )]
-position = Vector2( -105, -200 )
-current = true
-
-[node name="Camera2" parent="Cameras" instance=ExtResource( 8 )]
-position = Vector2( 160, -208 )
-
-[node name="Camera3" parent="Cameras" instance=ExtResource( 8 )]
-position = Vector2( 551, -203 )
-
-[node name="Camera4" type="Camera2D" parent="Cameras"]
-position = Vector2( 1058, -54 )
-zoom = Vector2( 0.2, 0.2 )
-smoothing_enabled = true
-
-[node name="Camera5" type="Camera2D" parent="Cameras"]
-position = Vector2( 1107, 516 )
-zoom = Vector2( 0.2, 0.2 )
-smoothing_enabled = true
-
 [node name="CameraPoint" type="Node2D" parent="."]
 position = Vector2( 0, -40 )
 
 [node name="CameraPoint1" parent="CameraPoint" instance=ExtResource( 1 )]
 position = Vector2( 88, -128 )
-current_camera = NodePath("../../Cameras/Camera1")
+current_camera = NodePath("../../Player/Camera1")
 player = NodePath("../../Player")
 next_point = NodePath("../CameraPoint2")
 camera_left_exist = true
@@ -2052,8 +2032,8 @@ camera_right_exist = true
 current_camera_left = true
 
 [node name="CameraPoint2" parent="CameraPoint" instance=ExtResource( 1 )]
-position = Vector2( 472, -55 )
-current_camera = NodePath("../../Cameras/Camera2")
+position = Vector2( 472, -48 )
+current_camera = NodePath("../../Player/Camera1")
 player = NodePath("../../Player")
 next_point = NodePath("../CameraPoint3")
 prev_point = NodePath("../CameraPoint1")
@@ -2064,20 +2044,26 @@ current_camera_left = true
 [node name="CameraPoint3" parent="CameraPoint" instance=ExtResource( 1 )]
 position = Vector2( 1002, -73 )
 rotation = 1.5708
-enabled = false
-current_camera = NodePath("../../Cameras/Camera3")
+current_camera = NodePath("../../Player/Camera1")
 player = NodePath("../../Player")
+next_point = NodePath("../CameraPoint4")
+prev_point = NodePath("../CameraPoint2")
 vertical = false
 camera_left_exist = true
 camera_right_exist = true
 current_camera_left = true
 
 [node name="CameraPoint4" parent="CameraPoint" instance=ExtResource( 1 )]
-position = Vector2( 980, 496 )
+position = Vector2( 1024, 496 )
 rotation = 1.5708
-current_camera = NodePath("../../Cameras/Camera4")
+current_camera = NodePath("../../Player/Camera1")
 player = NodePath("../../Player")
+prev_point = NodePath("../CameraPoint3")
 vertical = false
+camera_left_exist = true
+camera_right_exist = true
+current_camera_left = true
+one_time_pass = true
 
 [node name="Enemys" type="Node2D" parent="."]
 __meta__ = {
@@ -2103,16 +2089,21 @@ move_to = Vector2( 20, 0 )
 speed = 20.0
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( -104, -176 )
+position = Vector2( -104, -168 )
 acceleration = 20
 deceleration = 10
 max_speed = 75
 jump_slowing_down = 10
 
-[node name="RemoteTransform2D" parent="Player" index="11"]
-position = Vector2( -1, -24 )
-remote_path = NodePath("../../Cameras/Camera1")
+[node name="Camera1" type="Camera2D" parent="Player"]
+position = Vector2( 0, -16 )
+current = true
+zoom = Vector2( 0.2, 0.2 )
+smoothing_enabled = true
+drag_margin_top = 0.55
+editor_draw_drag_margin = true
+script = ExtResource( 8 )
 
-[connection signal="grounded_updated" from="Player" to="Cameras/Camera1" method="_on_Player_grounded_updated"]
+[connection signal="grounded_updated" from="Player" to="Player/Camera1" method="_on_Player_grounded_updated"]
 
 [editable path="Player"]

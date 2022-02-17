@@ -41,11 +41,8 @@ position = Vector2( 12, -81 )
 shape = SubResource( 3 )
 disabled = true
 
-[node name="camera_limit_right" type="Node2D" parent="."]
-position = Vector2( -8, -64 )
-
-[node name="camera_limit_left" type="Node2D" parent="."]
-position = Vector2( 8, -64 )
+[node name="camera_limit" type="Node2D" parent="."]
+position = Vector2( 0, -64 )
 
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Area2D_body_exited"]

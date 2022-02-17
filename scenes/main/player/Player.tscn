@@ -197,7 +197,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.5, 4 )
+extents = Vector2( 4, 4 )
 
 [sub_resource type="StyleBoxFlat" id=51]
 bg_color = Color( 0, 0, 0, 0.376471 )
@@ -335,7 +335,7 @@ anims/Run = SubResource( 18 )
 anims/RunPointingUp = SubResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.5, 2 )
+position = Vector2( -1, 2 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -356,12 +356,12 @@ cast_to = Vector2( -1, 0 )
 [node name="WallRaycastsRight" type="Node2D" parent="."]
 
 [node name="RayCast1" type="RayCast2D" parent="WallRaycastsRight"]
-position = Vector2( 2.09291, -2 )
+position = Vector2( 3.1, -2 )
 enabled = true
 cast_to = Vector2( 1, 0 )
 
 [node name="RayCast2" type="RayCast2D" parent="WallRaycastsRight"]
-position = Vector2( 2.05145, 5.9476 )
+position = Vector2( 3.1, 6 )
 enabled = true
 cast_to = Vector2( 1, 0 )
 
@@ -536,11 +536,6 @@ shape = SubResource( 53 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
-position = Vector2( 0, 16 )
-update_rotation = false
-update_scale = false
 
 [node name="Coyote timer" type="Timer" parent="."]
 wait_time = 0.15

@@ -29,23 +29,25 @@ func _on_Area2D_body_entered(body):
 				current_camera_left = true
 				current_camera_right = false
 				if vertical:
-					get_node(current_camera).limit_right = $camera_limit_right.global_position.x
-					if prev_point:
-						get_node(current_camera).limit_left = get_node(next_point).get_node("camera_limit_left").global_position.x
+					get_node(current_camera).limit_right = $camera_limit.global_position.x
+					if prev_point and get_node(prev_point).vertical:
+						get_node(current_camera).limit_left = get_node(next_point).get_node("camera_limit").global_position.x
 					else: get_node(current_camera).limit_left = -10000000
 				$StaticBodyRight/CollisionShape2D.set_deferred("disabled", false)
 		
 		elif camera_right_exist and current_camera_left:
 			if body.is_in_group("player"):
+				#print(get_node(next_point).vertical)
 				#get_node(switch_to_right).current = true
 				#current_camera = switch_to_right
 				#get_node(player).get_node("RemoteTransform2D").set_remote_node(switch_to_right)
 				current_camera_left = false
 				current_camera_right = true
 				if vertical:
-					get_node(current_camera).limit_left = $camera_limit_left.global_position.x
-					if next_point:
-						get_node(current_camera).limit_right = get_node(next_point).get_node("camera_limit_right").global_position.x
+					get_node(current_camera).limit_left = $camera_limit.global_position.x
+					if next_point and get_node(next_point).vertical:
+						get_node(current_camera).limit_right = get_node(next_point).get_node("camera_limit").global_position.x
+						
 					else: get_node(current_camera).limit_right = 1000000
 				$StaticBodyLeft/CollisionShape2D.set_deferred("disabled", false)
 	
@@ -58,8 +60,9 @@ func _on_Area2D_body_exited(body):
 
 func _ready():
 	if current_camera_left:
-		get_node(current_camera).limit_right = $camera_limit_right.global_position.x
-	elif current_camera_right:
-		get_node(current_camera).limit_left = $camera_limit_left.global_position.x
+		get_node(current_camera).limit_right = 81
+		
+	#elif current_camera_right:
+	#	get_node(current_camera).limit_left = $camera_limit.global_position.x
 
 
