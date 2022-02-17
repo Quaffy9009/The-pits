@@ -31,7 +31,7 @@ func _on_Area2D_body_entered(body):
 				if vertical:
 					get_node(current_camera).limit_right = $camera_limit.global_position.x
 					if prev_point and get_node(prev_point).vertical:
-						get_node(current_camera).limit_left = get_node(next_point).get_node("camera_limit").global_position.x
+						get_node(current_camera).limit_left = get_node(prev_point).get_node("camera_limit").global_position.x
 					else: get_node(current_camera).limit_left = -10000000
 				$StaticBodyRight/CollisionShape2D.set_deferred("disabled", false)
 		
@@ -60,7 +60,7 @@ func _on_Area2D_body_exited(body):
 
 func _ready():
 	if current_camera_left:
-		get_node(current_camera).limit_right = 81
+		get_node(current_camera).limit_right = 89
 		
 	#elif current_camera_right:
 	#	get_node(current_camera).limit_left = $camera_limit.global_position.x

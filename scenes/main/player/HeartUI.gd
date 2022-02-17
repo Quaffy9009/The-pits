@@ -40,3 +40,4 @@ func _process(delta):
 		Global.shell_amount = 0
 		get_tree().change_scene("res://scenes/main/levels/level1/Level1.tscn")
 		Global.health = 6
+		Global.died()

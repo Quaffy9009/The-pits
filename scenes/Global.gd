@@ -32,4 +32,5 @@ func damage(ammount):
 func _on_Invincibility_timer_timeout():
 	is_stoped = true
 
-
+func died():
+	pass

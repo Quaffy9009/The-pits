@@ -2023,7 +2023,7 @@ last_position = Vector2( -928, 552 )
 position = Vector2( 0, -40 )
 
 [node name="CameraPoint1" parent="CameraPoint" instance=ExtResource( 1 )]
-position = Vector2( 88, -128 )
+position = Vector2( 96, -128 )
 current_camera = NodePath("../../Player/Camera1")
 player = NodePath("../../Player")
 next_point = NodePath("../CameraPoint2")
